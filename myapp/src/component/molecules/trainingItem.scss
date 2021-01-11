@@ -1,0 +1,22 @@
+@import '../../color.scss';
+
+table{
+    border:1px gray solid;
+    border-collapse:separate;
+    border-spacing: 0;
+    border-radius: 5px;
+    overflow: hidden;
+    width: 50%;
+    text-align: center;
+
+    .header{
+        border:$light-gray;
+        background-color: $light-gray;
+    }
+
+    td{
+        padding: 8px;
+        border-bottom: 1px solid $light-gray;
+    }
+
+}

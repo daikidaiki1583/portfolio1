@@ -1,0 +1,39 @@
+@import '../../color.scss';
+
+@mixin form{
+    height: 30px;
+    width: 100%;
+    margin: 0;
+    padding:4px;
+    border:solid 1px;
+    box-sizing:border-box;  
+}
+
+form{
+    width: 50%;
+    padding: 8px 16px;
+    margin:0 auto;
+    border:1px solid black;
+    display: flex;
+    flex-direction: column;
+
+    label{
+        width: 50%;
+        margin: auto;
+        padding: 8px;
+        select,input{
+            @include form;
+            
+        }
+    }
+
+    button{
+        @include form;
+        width: 50%;
+        margin:16px auto;
+
+    }
+
+
+
+}

@@ -1,0 +1,19 @@
+header{
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    .title{
+        font-weight: bold;
+        font-size: 20px;
+        margin:8px 0 8px 8px;
+    }
+    nav{
+        width: 50%;
+        padding: 8px;
+        display: flex;
+
+        a{
+            margin: 10px;
+        }
+    }
+}
