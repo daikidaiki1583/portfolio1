@@ -1,4 +1,5 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
+import axios from '../../axios';
 import TrainingItem from '../molecules/trainingItem';
 import './trainingList.scss';
 
@@ -7,6 +8,16 @@ const TrainingList: FC = () => {
     { name: '腕立て', id: 1 },
     { name: '腹筋', id: 2 },
   ];
+
+  useEffect(() => {
+    axios
+      .get('/api/get')
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => console.log(err));
+  });
+
   return (
     <>
       {trainingMenu.map((menu) => (
