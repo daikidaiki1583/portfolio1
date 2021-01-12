@@ -9,14 +9,14 @@ const TrainingList: FC = () => {
     { name: '腹筋', id: 2 },
   ];
 
-  useEffect(() => {
-    axios
-      .get('/api/get')
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => console.log(err));
-  });
+  // useEffect(() => {
+  //   axios
+  //     .get('/api/get')
+  //     .then((response) => {
+  //       console.log(response);
+  //     })
+  //     .catch((err) => console.log(err));
+  // });
 
   return (
     <>

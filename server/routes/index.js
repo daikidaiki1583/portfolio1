@@ -18,14 +18,25 @@ app.use(express.json());
 app.use(bodyparser.json({ type: "application/json" }));
 app.use(bodyparser.urlencoded({ extended: true }));
 
-app.get("api/get", (req, res) => {
-  const sqlSelect = "SELECT * FROM user";
+app.get("/api/get/training", (req, res) => {
+  const sqlSelect = "SELECT * FROM training order by id";
   db.query(sqlSelect, (err, result) => {
     if (err) console.log(err);
     res.send(result);
   });
 });
 
+app.post("/api/insert/:userid/", (req, res) => {
+  const userid = req.params.userid;
+  const { dt, trainingid, count } = req.body;
+  const sqlInsert =
+    "INSERT trainingrecord (userid,dt,trainingid,count) values (?,?,?,?);";
+  db.query(sqlInsert, [userid, dt, trainingid, count], (err, result) => {
+    if (err) console.log(err);
+    res.send(result);
+  });
+});
+
 app.listen(port, () => {
-  console.log(`listening at　port:${port}　`);
+  console.log(`listening at　port:${port}`);
 });

@@ -1,19 +1,35 @@
-import React, { FC, useState, useMemo } from 'react';
+import React, { FC, useState, useMemo, useEffect } from 'react';
 import calculateToday from '../../data/today';
+import axios from '../../axios';
 import './inputRecord.scss';
+
+type data = {
+  id: number;
+  menu: string;
+};
 
 const InputRecord: FC = () => {
   const today = useMemo(() => calculateToday(), []);
-  const [input, setInput] = useState<string>('');
-  const [option, setOption] = useState<string>('腕立て');
+  const [trainingList, setTrainingList] = useState<data[]>([]);
+  const [count, setCount] = useState<string>('');
+  const [trainingid, setTrainingid] = useState<number>(1);
   const [date, setDate] = useState<string>(today);
 
+  useEffect(() => {
+    axios
+      .get('/api/get/training')
+      .then((response) => {
+        setTrainingList(response.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value);
+    setCount(e.target.value);
   };
 
   const handleChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setOption(e.target.value);
+    setTrainingid(parseInt(e.target.value, 10));
   };
 
   const handleChangeDate = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,17 +37,36 @@ const InputRecord: FC = () => {
   };
 
   const handleSubmit = () => {
-    setInput('');
+    const userid = 1; // 動的に取得できるように修正する
+    axios
+      .post(`/api/insert/${userid}/`, {
+        dt: date,
+        trainingid,
+        count,
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => console.log(err));
+
+    setCount('');
   };
 
   return (
     <form>
       <label htmlFor="menu">
         <div>メニュー</div>
-        <select id="menu" value={option} onChange={handleChangeSelect}>
-          <option value="腕立て">腕立て</option>
-          <option value="腹筋">腹筋</option>
-          <option value="スクワット">スクワット</option>
+        <select
+          id="menu"
+          value={trainingid}
+          onChange={handleChangeSelect}
+          required
+        >
+          {trainingList.map((training) => (
+            <option value={training.id} key={training.id}>
+              {training.menu}
+            </option>
+          ))}
         </select>
       </label>
 
@@ -40,14 +75,21 @@ const InputRecord: FC = () => {
         <input
           id="count"
           type="number"
-          value={input}
+          value={count}
           onChange={handleChangeInput}
+          required
         />
       </label>
 
       <label htmlFor="date">
         <div>実施日</div>
-        <input id="date" type="date" value={date} onChange={handleChangeDate} />
+        <input
+          id="date"
+          type="date"
+          value={date}
+          onChange={handleChangeDate}
+          required
+        />
       </label>
       <button type="button" onClick={handleSubmit}>
         登録
