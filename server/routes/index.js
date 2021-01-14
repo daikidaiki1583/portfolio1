@@ -26,6 +26,15 @@ app.get("/api/get/training", (req, res) => {
   });
 });
 
+app.get("/api/get/trainingrecord", (req, res) => {
+  const { dt } = req.query;
+  const sqlSelect = `SELECT * FROM trainingrecord join training on trainingrecord.trainingid = training.tr_id where dt = "${dt}" order by createdAt`;
+  db.query(sqlSelect, (err, result) => {
+    if (err) console.log(err);
+    res.send(result);
+  });
+});
+
 app.post("/api/insert/:userid/", (req, res) => {
   const userid = req.params.userid;
   const { dt, trainingid, count } = req.body;

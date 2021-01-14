@@ -1,29 +1,37 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useState, useEffect, useMemo } from 'react';
 import axios from '../../axios';
 import TrainingItem from '../molecules/trainingItem';
+import { data } from '../../type/type';
 import './trainingList.scss';
+import calculateToday from '../../data/today';
 
 const TrainingList: FC = () => {
-  const trainingMenu = [
-    { name: '腕立て', id: 1 },
-    { name: '腹筋', id: 2 },
-  ];
+  const today = useMemo(() => calculateToday(), []);
+  const [trainingRecord, setTrainingRecord] = useState<data[]>([]);
+  const [trainingMenu, setTrainingMenu] = useState<string[]>([]);
 
-  // useEffect(() => {
-  //   axios
-  //     .get('/api/get')
-  //     .then((response) => {
-  //       console.log(response);
-  //     })
-  //     .catch((err) => console.log(err));
-  // });
+  useEffect(() => {
+    axios
+      .get('/api/get/trainingrecord', {
+        params: {
+          dt: today,
+        },
+      })
+      .then((response) => {
+        setTrainingRecord(response.data);
+        response.data.map((tr: data) =>
+          setTrainingMenu((state) => [...state, tr.menu]),
+        );
+      })
+      .catch((err) => console.log(err));
+  }, [today]);
 
   return (
     <>
-      {trainingMenu.map((menu) => (
-        <ul className="training-list" key={menu.id}>
-          <h1>{menu.name}</h1>
-          <TrainingItem menu={menu.name} />
+      {[...new Set(trainingMenu)].map((menu) => (
+        <ul className="training-list" key={menu}>
+          <h1>{menu}</h1>
+          <TrainingItem menu={menu} record={trainingRecord} />
         </ul>
       ))}
     </>

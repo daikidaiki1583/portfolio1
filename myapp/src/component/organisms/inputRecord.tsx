@@ -3,8 +3,9 @@ import calculateToday from '../../data/today';
 import axios from '../../axios';
 import './inputRecord.scss';
 
+/* eslint-disable camelcase */
 type data = {
-  id: number;
+  tr_id: number;
   menu: string;
 };
 
@@ -63,7 +64,7 @@ const InputRecord: FC = () => {
           required
         >
           {trainingList.map((training) => (
-            <option value={training.id} key={training.id}>
+            <option value={training.tr_id} key={training.menu}>
               {training.menu}
             </option>
           ))}
