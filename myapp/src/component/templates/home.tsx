@@ -1,9 +1,4 @@
 import React, { FC } from 'react';
 
-const Home: FC = () => (
-  <div>
-    <h1>home</h1>
-  </div>
-);
-
+const Home: FC = () => <div>home</div>;
 export default Home;

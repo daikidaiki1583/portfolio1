@@ -7,10 +7,6 @@ const Header: FC = () => (
     <div className="title">
       <Link to="/">筋トレコード</Link>
     </div>
-    <nav>
-      <Link to="/traininglist">成果を見る</Link>
-      <Link to="/inputRecord">記録する</Link>
-    </nav>
   </header>
 );
 

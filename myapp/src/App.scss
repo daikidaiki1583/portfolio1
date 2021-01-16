@@ -1,0 +1,36 @@
+* {
+  list-style: none;
+  box-sizing: border-box;
+  
+}
+
+.body{
+  margin: 0 20%;
+  display: flex;
+                          
+  .side{
+    width: 25%;  
+    padding: 8px;
+    // position: fixed;  
+  }
+
+  .main{
+    padding: 8px;
+    width: 75%;
+    height: 90vh;
+    overflow: scroll;
+    scrollbar-width: none;
+
+  }
+  .main::-webkit-scrollbar{
+    display: none;
+  }
+  
+}
+
+
+a{
+  text-decoration: none;
+  color: black;
+}
+

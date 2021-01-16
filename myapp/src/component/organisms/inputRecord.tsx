@@ -1,4 +1,5 @@
 import React, { FC, useState, useMemo, useEffect } from 'react';
+import Input from '../atoms/input';
 import calculateToday from '../../data/today';
 import axios from '../../axios';
 import './inputRecord.scss';
@@ -71,29 +72,22 @@ const InputRecord: FC = () => {
         </select>
       </label>
 
-      <label htmlFor="count">
-        <div>回数</div>
-        <input
-          id="count"
-          type="number"
-          value={count}
-          onChange={handleChangeInput}
-          required
-        />
-      </label>
+      <Input
+        id="count"
+        type="number"
+        value={count}
+        handleChange={handleChangeInput}
+        placeholder="回数 "
+      />
 
-      <label htmlFor="date">
-        <div>実施日</div>
-        <input
-          id="date"
-          type="date"
-          value={date}
-          onChange={handleChangeDate}
-          required
-        />
-      </label>
+      <Input
+        id="date"
+        type="date"
+        value={date}
+        handleChange={handleChangeDate}
+      />
       <button type="button" onClick={handleSubmit}>
-        登録
+        記録する
       </button>
     </form>
   );

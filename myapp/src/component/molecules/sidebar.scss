@@ -1,0 +1,22 @@
+@import '../../color.scss';
+
+.sidebar{
+    display: flex;
+    border: solid 1px;
+    border-radius: 10px;
+    background-color: $light-gray;
+    flex-direction: column;
+
+    .link{
+        margin: 10px;
+
+        .fas{
+            font-size: 24px;
+            margin: 0 8px;
+        }
+        span{
+           height: 24px;
+        }
+    }
+
+}

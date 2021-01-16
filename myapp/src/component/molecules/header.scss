@@ -1,19 +1,9 @@
 header{
-    height: 80px;
-    display: flex;
-    justify-content: space-between;
+    height: 10vh;
+    text-align: center;
     .title{
         font-weight: bold;
-        font-size: 20px;
-        margin:8px 0 8px 8px;
-    }
-    nav{
-        width: 50%;
-        padding: 8px;
-        display: flex;
-
-        a{
-            margin: 10px;
-        }
+        font-size:28px;
+        margin:24px 0 8px 40px;
     }
 }
