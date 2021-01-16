@@ -5,15 +5,17 @@ import './trainingItem.scss';
 type Props = {
   record: dataType[];
   menu: string;
+  handledelete: (id: number) => void;
 };
 
-const TrainingItem: FC<Props> = ({ record, menu }) => (
+const TrainingItem: FC<Props> = ({ record, menu, handledelete }) => (
   <table>
     <thead>
       <tr className="header">
         <th>セット数</th>
         <th>回数</th>
         <th>時間</th>
+        <th> </th>
       </tr>
     </thead>
     <tbody>
@@ -23,7 +25,17 @@ const TrainingItem: FC<Props> = ({ record, menu }) => (
           <tr key={prev.id}>
             <td>{index + 1}</td>
             <td className="row">{prev.count} 回</td>
-            <td>{prev.createdAt}</td>
+            <td>
+              {new Date(prev.createdAt).getUTCHours()}:
+              {new Date(prev.createdAt).getUTCMinutes() < 10
+                ? 0 + String(new Date(prev.createdAt).getUTCMinutes())
+                : new Date(prev.createdAt).getUTCMinutes()}
+            </td>
+            <td>
+              <button type="button" onClick={() => handledelete(prev.id)}>
+                削除
+              </button>
+            </td>
           </tr>
         ))}
     </tbody>

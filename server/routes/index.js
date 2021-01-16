@@ -26,6 +26,14 @@ app.get("/api/get/training", (req, res) => {
   });
 });
 
+app.delete("/api/delete/:id", (req, res) => {
+  const id = req.params.id;
+  const sqlDelete = "DELETE FROM trainingrecord WHERE id = ?;";
+  db.query(sqlDelete, [id], (err, result) => {
+    if (err) console.log(err);
+  });
+});
+
 app.get("/api/get/trainingrecord", (req, res) => {
   const { dt } = req.query;
   const sqlSelect = `SELECT * FROM trainingrecord join training on trainingrecord.trainingid = training.tr_id where dt = "${dt}" order by createdAt`;

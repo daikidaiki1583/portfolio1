@@ -22,12 +22,22 @@ const TrainingList: FC<Props> = ({ date }) => {
       .then((response) => {
         setTrainingRecord(response.data);
         setTrainingMenu([]);
-        response.data.map((tr: data) =>
-          setTrainingMenu((state) => [...state, tr.menu]),
+        response.data.map((training: data) =>
+          setTrainingMenu((state) => [...state, training.menu]),
         );
       })
       .catch((err) => console.log(err));
   }, [date]);
+
+  const deleteRecord = (id: number) => {
+    axios.delete(`/api/delete/${id}`);
+    const newRecord = trainingRecord.filter((rec) => rec.id !== id);
+    setTrainingMenu([]);
+    newRecord.map((training) =>
+      setTrainingMenu((state) => [training.menu, ...state]),
+    );
+    setTrainingRecord(newRecord);
+  };
 
   return (
     <>
@@ -35,7 +45,11 @@ const TrainingList: FC<Props> = ({ date }) => {
         [...new Set(trainingMenu)].map((menu) => (
           <ul className="training-list" key={menu}>
             <h1>{menu}</h1>
-            <TrainingItem menu={menu} record={trainingRecord} />
+            <TrainingItem
+              menu={menu}
+              record={trainingRecord}
+              handledelete={deleteRecord}
+            />
           </ul>
         ))
       ) : (
