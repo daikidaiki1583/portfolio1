@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react';
 import Input from '../atoms/input';
+import axios from '../../axios';
 
 const SignIn: FC = () => {
   const [password, setPassword] = useState<string>('');
@@ -11,6 +12,23 @@ const SignIn: FC = () => {
     } else {
       setPassword(e.target.value);
     }
+  };
+
+  const handleSubmit = (): void => {
+    axios
+      .post('/signin/', {
+        password,
+        username,
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    setUserneme('');
+    setPassword('');
   };
 
   return (
@@ -29,7 +47,9 @@ const SignIn: FC = () => {
         handleChange={handleChange}
         placeholder="パスワード"
       />
-      <button type="button">サインイン</button>
+      <button type="button" onClick={() => handleSubmit()}>
+        サインイン
+      </button>
     </form>
   );
 };

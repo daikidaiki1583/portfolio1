@@ -74,6 +74,21 @@ app.post("/api/insert/:userid/", (req, res) => {
   });
 });
 
+//サインイン
+app.post("/signin/", (req, res) => {
+  const { username, password } = req.body;
+  console.log(username, password);
+  const sqlInsert = "INSERT user (name,password) values (?,?);";
+  bcrypt.hash(password, saltRounds, (err, hash) => {
+    if (err) console.log(err);
+    db.query(sqlInsert, [username, hash], (err, result) => {
+      if (err) console.log(err);
+      res.send(result);
+    });
+  });
+});
+
+//ポートリッスン
 app.listen(port, () => {
   console.log(`listening at　port:${port}`);
 });
