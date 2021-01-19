@@ -1,28 +1,24 @@
 @import '../../color.scss';
 
 @mixin form{
-    height: 30px;
     width: 100%;
     margin: 0;
-    padding:4px;
-    border:solid 1px;
+    padding:8px;
     box-sizing:border-box;  
+    width: 100%;        
 }
 
 form{
     width: 100%;
-    padding: 8px 16px;
     margin:0 auto;
     display: flex;
     flex-direction: column;
 
     label{
         width: 50%;
-        margin: auto;
-        padding: 8px;
-        select,input{
+        margin: 8px auto;
+        select{
             @include form;
-            
         }
     }
 
@@ -30,9 +26,30 @@ form{
         @include form;
         width: 50%;
         margin:16px auto;
-
     }
 
+    .success{
+        opacity: 0;
+        width: 50%;
+        margin: auto;
+        text-align: center;
+        border: 1px solid $medium-green;
+        color: $medium-green;
+        border-radius: 10px;
+        background-color: $pastel-green;
+        &.add{
+            animation-name: fulffy;
+            animation-duration: 3s;
+        }
+    }
+
+    @keyframes fulffy {
+        0% {opacity: 0;}
+        20% {opacity: 100;}
+        80% {opacity: 100;}
+        100% {opacity: 0;}
+
+    }
 
 
 }

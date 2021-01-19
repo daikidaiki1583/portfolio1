@@ -6,6 +6,7 @@ import Home from './component/templates/home';
 import Sidebar from './component/molecules/sidebar';
 import TrainingView from './component/templates/trainingVIew';
 import InputRecord from './component/organisms/inputRecord';
+import Login from './component/templates/login';
 
 const App: FC = () => (
   <div className="App">
@@ -24,6 +25,9 @@ const App: FC = () => (
           </Route>
           <Route path="/trainingview">
             <TrainingView />
+          </Route>
+          <Route path="/signin">
+            <Login />
           </Route>
         </Switch>
       </div>

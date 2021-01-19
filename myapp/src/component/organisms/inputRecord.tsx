@@ -1,43 +1,35 @@
 import React, { FC, useState, useMemo, useEffect } from 'react';
+import SelectMenu from '../atoms/selectMenu';
 import Input from '../atoms/input';
 import calculateToday from '../../data/today';
 import axios from '../../axios';
 import './inputRecord.scss';
 
-/* eslint-disable camelcase */
-type data = {
-  tr_id: number;
-  menu: string;
-};
-
 const InputRecord: FC = () => {
   const today = useMemo(() => calculateToday(), []);
-  const [trainingList, setTrainingList] = useState<data[]>([]);
   const [count, setCount] = useState<string>('');
   const [trainingid, setTrainingid] = useState<number>(1);
-  const [date, setDate] = useState<string>(today);
+  const [date, setInputDate] = useState<string>(today);
+  const [isSend, setIsSend] = useState<boolean>(false);
 
+  /* eslint-disable arrow-body-style */
   useEffect(() => {
-    axios
-      .get('/api/get/training')
-      .then((response) => {
-        setTrainingList(response.data);
-      })
-      .catch((err) => console.log(err));
+    return () => {
+      setIsSend(false);
+    };
   }, []);
-
+  /* eslint-enable arrow-body-style */
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCount(e.target.value);
+  };
+
+  const handleChangeDate = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputDate(e.target.value);
   };
 
   const handleChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setTrainingid(parseInt(e.target.value, 10));
   };
-
-  const handleChangeDate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDate(e.target.value);
-  };
-
   const handleSubmit = () => {
     const userid = 1; // 動的に取得できるように修正する
     axios
@@ -47,7 +39,10 @@ const InputRecord: FC = () => {
         count,
       })
       .then((response) => {
-        console.log(response);
+        if (response.status === 200) {
+          setIsSend(true);
+          setTimeout(() => setIsSend(false), 3000);
+        }
       })
       .catch((err) => console.log(err));
 
@@ -56,21 +51,7 @@ const InputRecord: FC = () => {
 
   return (
     <form>
-      <label htmlFor="menu">
-        <div>メニュー</div>
-        <select
-          id="menu"
-          value={trainingid}
-          onChange={handleChangeSelect}
-          required
-        >
-          {trainingList.map((training) => (
-            <option value={training.tr_id} key={training.menu}>
-              {training.menu}
-            </option>
-          ))}
-        </select>
-      </label>
+      <SelectMenu value={trainingid} handleChange={handleChangeSelect} />
 
       <Input
         id="count"
@@ -89,6 +70,10 @@ const InputRecord: FC = () => {
       <button type="button" onClick={handleSubmit}>
         記録する
       </button>
+      <div className={`success ${isSend ? 'add' : ''}`}>
+        {isSend}
+        記録に成功しました。
+      </div>
     </form>
   );
 };

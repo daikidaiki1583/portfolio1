@@ -20,10 +20,11 @@ const TrainingList: FC<Props> = ({ date }) => {
         },
       })
       .then((response) => {
+        console.log(response.data);
         setTrainingRecord(response.data);
         setTrainingMenu([]);
         response.data.map((training: data) =>
-          setTrainingMenu((state) => [...state, training.menu]),
+          setTrainingMenu((state) => [training.menu, ...state]),
         );
       })
       .catch((err) => console.log(err));

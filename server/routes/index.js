@@ -4,6 +4,8 @@ const app = express();
 const mysql = require("mysql");
 const cors = require("cors");
 const port = 9000;
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 
 const db = mysql.createPool({
   host: "ip-10-0-24-237.ap-northeast-1.compute.internal",
@@ -37,6 +39,24 @@ app.delete("/api/delete/:id", (req, res) => {
 app.get("/api/get/trainingrecord", (req, res) => {
   const { dt } = req.query;
   const sqlSelect = `SELECT * FROM trainingrecord join training on trainingrecord.trainingid = training.tr_id where dt = "${dt}" order by createdAt`;
+  db.query(sqlSelect, (err, result) => {
+    if (err) console.log(err);
+    res.send(result);
+  });
+});
+
+app.get("/api/get/trainingrecord/graph", (req, res) => {
+  const { start, end } = req.query;
+  const sqlSelect = `SELECT * FROM trainingrecord join training on trainingrecord.trainingid = training.tr_id where dt <= "${end}" and dt >= "${start}" order by createdAt`;
+  db.query(sqlSelect, (err, result) => {
+    if (err) console.log(err);
+    res.send(result);
+  });
+});
+
+app.get("/api/get/trainingrecord/distinct/", (req, res) => {
+  // const { dt } = req.query;
+  const sqlSelect = `SELECT DISTINCT dt FROM trainingrecord order by dt desc limit 5`;
   db.query(sqlSelect, (err, result) => {
     if (err) console.log(err);
     res.send(result);

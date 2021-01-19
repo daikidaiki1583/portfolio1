@@ -12,6 +12,9 @@ const Sidebar: FC = () => (
       <i className="fas fa-pencil-alt" />
       <span>記録する</span>
     </Link>
+    <Link to="/signin" className="link">
+      <span>ユーザー登録</span>
+    </Link>
   </nav>
 );
 export default Sidebar;
