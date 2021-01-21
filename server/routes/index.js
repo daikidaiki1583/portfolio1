@@ -77,7 +77,6 @@ app.post("/api/insert/:userid/", (req, res) => {
 //サインイン
 app.post("/signin/", (req, res) => {
   const { username, password } = req.body;
-  console.log(username, password);
   const sqlInsert = "INSERT user (name,password) values (?,?);";
   bcrypt.hash(password, saltRounds, (err, hash) => {
     if (err) console.log(err);
@@ -87,6 +86,55 @@ app.post("/signin/", (req, res) => {
     });
   });
 });
+//genchan boyata
+// パスワード更新処理　追加必要
+
+const passport = require("passport");
+const Strategy = require("passport-local").Strategy;
+const session = require("express-session");
+
+app.use(
+  session({
+    secret: "testing",
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser(function (username, done) {
+  console.log("serializeUser");
+  done(null, username);
+});
+
+passport.deserializeUser(function (username, done) {
+  console.log("deserializeUser");
+  done(null, { name: username });
+});
+
+passport.use(
+  new Strategy(
+    {
+      usernameField: "username",
+      passwordField: "password",
+    },
+    (username, password, done) => {
+      db.query("select * from user;", (err, users) => {
+        console.log(users);
+      });
+    }
+  )
+);
+
+app.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/",
+  }),
+  res.redirect("/", +req.user.username)
+);
 
 //ポートリッスン
 app.listen(port, () => {

@@ -15,6 +15,9 @@ const Sidebar: FC = () => (
     <Link to="/signin" className="link">
       <span>ユーザー登録</span>
     </Link>
+    <Link to="/login" className="link">
+      <span>ログイン</span>
+    </Link>
   </nav>
 );
 export default Sidebar;

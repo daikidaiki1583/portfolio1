@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import Input from '../atoms/input';
 import axios from '../../axios';
 
-const Login: FC = () => {
+const SignIn: FC = () => {
   const [password, setPassword] = useState<string>('');
   const [username, setUserneme] = useState<string>('');
 
@@ -16,7 +16,7 @@ const Login: FC = () => {
 
   const handleSubmit = (): void => {
     axios
-      .post('login/', {
+      .post('/signin/', {
         password,
         username,
       })
@@ -49,10 +49,10 @@ const Login: FC = () => {
         placeholder="パスワード"
       />
       <button type="button" onClick={() => handleSubmit()}>
-        ログイン
+        サインイン
       </button>
     </form>
   );
 };
 
-export default Login;
+export default SignIn;
