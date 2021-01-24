@@ -16,12 +16,12 @@ const Login: FC = () => {
 
   const handleSubmit = (): void => {
     axios
-      .post('login/', {
+      .post('/login/', {
         password,
         username,
       })
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
       })
       .catch((err) => {
         console.log(err);

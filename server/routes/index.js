@@ -21,7 +21,7 @@ app.use(bodyparser.json({ type: "application/json" }));
 app.use(bodyparser.urlencoded({ extended: true }));
 
 app.get("/api/get/training", (req, res) => {
-  const sqlSelect = "SELECT * FROM training order by id";
+  const sqlSelect = "SELECT * FROM training order by tr_id";
   db.query(sqlSelect, (err, result) => {
     if (err) console.log(err);
     res.send(result);
@@ -79,14 +79,19 @@ app.post("/signin/", (req, res) => {
   const { username, password } = req.body;
   const sqlInsert = "INSERT user (name,password) values (?,?);";
   bcrypt.hash(password, saltRounds, (err, hash) => {
-    if (err) console.log(err);
+    if (err) return console.log(err);
     db.query(sqlInsert, [username, hash], (err, result) => {
-      if (err) console.log(err);
+      if (err) {
+        console.log(err);
+        res.send(err);
+        return;
+      }
       res.send(result);
     });
   });
 });
 //genchan boyata
+//dai d1583d
 // パスワード更新処理　追加必要
 
 const passport = require("passport");
@@ -103,9 +108,9 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.serializeUser(function (username, done) {
+passport.serializeUser(function (user, done) {
   console.log("serializeUser");
-  done(null, username);
+  done(null, user.id);
 });
 
 passport.deserializeUser(function (username, done) {
@@ -120,21 +125,29 @@ passport.use(
       passwordField: "password",
     },
     (username, password, done) => {
-      db.query("select * from user;", (err, users) => {
-        console.log(users);
-      });
+      db.query(
+        `select * from user where name = '${username}';`,
+        (err, user) => {
+          if (err) {
+            return done(err);
+          }
+          if (!user) {
+            return done(null, false);
+          }
+          bcrypt.compare(password, user[0].password, (err, result) => {
+            if (err) return console.log(err);
+            console.log(result);
+            done(null, user);
+          });
+        }
+      );
     }
   )
 );
 
-app.post(
-  "/login",
-  passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/",
-  }),
-  res.redirect("/", +req.user.username)
-);
+app.post("/login/", passport.authenticate("local"), (req, res) => {
+  res.send(req.user);
+});
 
 //ポートリッスン
 app.listen(port, () => {

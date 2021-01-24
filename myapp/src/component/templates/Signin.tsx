@@ -21,7 +21,13 @@ const SignIn: FC = () => {
         username,
       })
       .then((response) => {
-        console.log(response);
+        switch (response.data.sqlState) {
+          case '23000':
+            console.log('そのユーザー名はすでに使用されています');
+            // エラー内容を表示させてわかるようにする
+            break;
+          default:
+        }
       })
       .catch((err) => {
         console.log(err);
