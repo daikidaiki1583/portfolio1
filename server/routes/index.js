@@ -15,7 +15,13 @@ const db = mysql.createPool({
   database: "training",
 });
 
-app.use(cors());
+app.use(
+  cors({
+    credentials: true,
+    origin: "http://localhost:3000",
+  })
+);
+
 app.use(express.json());
 app.use(bodyparser.json({ type: "application/json" }));
 app.use(bodyparser.urlencoded({ extended: true }));
@@ -90,8 +96,6 @@ app.post("/signin/", (req, res) => {
     });
   });
 });
-//genchan boyata
-//dai d1583d
 // パスワード更新処理　追加必要
 
 const passport = require("passport");
@@ -103,20 +107,13 @@ app.use(
     secret: "testing",
     resave: false,
     saveUninitialized: true,
+    cookie: {
+      sameSite: "none",
+    },
   })
 );
 app.use(passport.initialize());
 app.use(passport.session());
-
-passport.serializeUser(function (user, done) {
-  console.log("serializeUser");
-  done(null, user.id);
-});
-
-passport.deserializeUser(function (username, done) {
-  console.log("deserializeUser");
-  done(null, { name: username });
-});
 
 passport.use(
   new Strategy(
@@ -145,8 +142,40 @@ passport.use(
   )
 );
 
-app.post("/login/", passport.authenticate("local"), (req, res) => {
-  res.send(req.user);
+passport.serializeUser(function (user, done) {
+  console.log("serializeUser");
+  done(null, user[0].id);
+});
+
+passport.deserializeUser(function (id, done) {
+  console.log("deserializeUser");
+  const sqlFind = `select * from user where id = ${id}; `;
+  db.query(sqlFind, (err, result) => {
+    if (err) console.log(err);
+    console.log(`${result}:deserial`);
+  });
+  done(null, { name: username });
+});
+
+app.post(
+  "/login/",
+  passport.authenticate("local", {
+    session: true,
+  }),
+  (req, res) => {
+    const uid = req.user[0].id;
+    const sid = req.sessionID;
+    const sqlInsert = "INSERT session (sid,uid) values (?,?);";
+    db.query(sqlInsert, [sid, uid], (err, result) => {
+      if (err) console.log(err);
+      res.send(result);
+    });
+    res.send(req.user);
+  }
+);
+
+app.get("/api/getuser", (req, res) => {
+  console.log(req.session.passport, "session");
 });
 
 //ポートリッスン

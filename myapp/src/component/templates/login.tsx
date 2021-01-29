@@ -3,6 +3,7 @@ import Input from '../atoms/input';
 import axios from '../../axios';
 
 const Login: FC = () => {
+  const [userid, setUserId] = useState<number>();
   const [password, setPassword] = useState<string>('');
   const [username, setUserneme] = useState<string>('');
 
@@ -14,14 +15,18 @@ const Login: FC = () => {
     }
   };
 
+  const data = {
+    username,
+    password,
+  };
   const handleSubmit = (): void => {
     axios
-      .post('/login/', {
-        password,
-        username,
+      .post('/login/', data, {
+        withCredentials: true,
       })
       .then((response) => {
-        console.log(response.data);
+        console.log(response.data[0].id);
+        setUserId(response.data[0].id);
       })
       .catch((err) => {
         console.log(err);
@@ -51,6 +56,7 @@ const Login: FC = () => {
       <button type="button" onClick={() => handleSubmit()}>
         ログイン
       </button>
+      <div>{userid}</div>
     </form>
   );
 };
