@@ -1,12 +1,13 @@
 const express = require("express");
-const bodyparser = require("body-parser");
 const app = express();
-const mysql = require("mysql");
-const cors = require("cors");
 const port = 9000;
+
+const bodyparser = require("body-parser");
+const cors = require("cors");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
+const mysql = require("mysql");
 const db = mysql.createPool({
   host: "ip-10-0-24-237.ap-northeast-1.compute.internal",
   user: "guestuser",
@@ -18,7 +19,7 @@ const db = mysql.createPool({
 app.use(
   cors({
     credentials: true,
-    origin: "http://localhost:3000",
+    origin: "https://localhost:3000",
   })
 );
 
@@ -179,7 +180,15 @@ app.get("/api/getuser", (req, res) => {
   console.log(req.session.passport, "session");
 });
 
+const https = require("https");
+const fs = require("fs");
+const options = {
+  cert: fs.readFileSync("/etc/letsencrypt/live/kintrecord.link/privkey.pem"),
+  key: fs.readFileSync("/etc/letsencrypt/live/kintrecord.link/fullchain.pem"),
+};
+
+const server = https.createServer(options, app);
 //ポートリッスン
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`listening at　port:${port}`);
 });
