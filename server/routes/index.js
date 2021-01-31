@@ -151,7 +151,7 @@ passport.deserializeUser(function (id, done) {
   db.query(sqlFind, (err, user) => {
     if (err) console.log(err);
     console.log(user[0]);
-    done(null, user[0].name);
+    done(null, user[0]);
   });
 });
 
@@ -165,7 +165,8 @@ app.post(
   }
 );
 
-app.get("/api/getuser", (req, res) => {
+app.get("/api/getuser/", (req, res) => {
+  console.log(req);
   res.send(req.user);
 });
 

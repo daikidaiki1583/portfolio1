@@ -14,11 +14,11 @@ const Context = (props: PropsWithChildren<any>) => {
 
   useEffect(() => {
     axios
-      .get('/api/getuser', {
+      .get('/api/getuser/', {
         withCredentials: true,
       })
-      .then((result) => {
-        setUser(user);
+      .then((res) => {
+        setUser(res.data);
       })
       .catch((err) => {
         console.log(err);
