@@ -19,7 +19,7 @@ const db = mysql.createPool({
 app.use(
   cors({
     credentials: true,
-    // origin: "https://kintrecord.link",
+    origin: "https://kintrecord.link",
   })
 );
 
@@ -166,7 +166,7 @@ app.post(
 );
 
 app.get("/api/getuser", (req, res) => {
-  console.log(req.session.passport, "session");
+  res.send(req.user);
 });
 
 const https = require("https");
