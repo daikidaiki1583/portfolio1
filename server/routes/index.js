@@ -19,7 +19,7 @@ const db = mysql.createPool({
 app.use(
   cors({
     credentials: true,
-    origin: "https://localhost:3000",
+    origin: "https://kintrecord.link",
   })
 );
 
@@ -108,10 +108,10 @@ app.use(
     secret: "testing",
     resave: false,
     saveUninitialized: true,
-    cookie: {
-      sameSite: "none",
-      secure: true,
-    },
+    // cookie: {
+    //   sameSite: "none",
+    //   // secure: true,
+    // },
   })
 );
 app.use(passport.initialize());
@@ -183,8 +183,9 @@ app.get("/api/getuser", (req, res) => {
 const https = require("https");
 const fs = require("fs");
 const options = {
-  cert: fs.readFileSync("/etc/letsencrypt/live/kintrecord.link/privkey.pem"),
-  key: fs.readFileSync("/etc/letsencrypt/live/kintrecord.link/fullchain.pem"),
+  key: fs.readFileSync("/etc/letsencrypt/archive/kintrecord.link/privkey1.pem"),
+  cert: fs.readFileSync("/etc/letsencrypt/archive/kintrecord.link/cert1.pem"),
+  ca: fs.readFileSync("/etc/letsencrypt/archive/kintrecord.link/chain1.pem"),
 };
 
 const server = https.createServer(options, app);

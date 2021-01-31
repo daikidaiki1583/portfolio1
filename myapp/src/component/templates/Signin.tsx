@@ -6,9 +6,12 @@ const SignIn: FC = () => {
   const [password, setPassword] = useState<string>('');
   const [username, setUserneme] = useState<string>('');
 
+  // axios.getにもwithcredentialつける
   useEffect(() => {
     axios
-      .get('/api/getuser/')
+      .get('/api/getuser/', {
+        withCredentials: true,
+      })
       .then((response) => console.log(response))
       .catch((err) => console.log(err));
   }, []);

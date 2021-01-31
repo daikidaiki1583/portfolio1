@@ -19,6 +19,7 @@ const Login: FC = () => {
     username,
     password,
   };
+
   const handleSubmit = (): void => {
     axios
       .post('/login/', data, {
