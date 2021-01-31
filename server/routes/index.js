@@ -108,10 +108,6 @@ app.use(
     secret: "testing",
     resave: false,
     saveUninitialized: true,
-    // cookie: {
-    //   sameSite: "none",
-    //   // secure: true,
-    // },
   })
 );
 app.use(passport.initialize());
@@ -158,16 +154,6 @@ passport.deserializeUser(function (id, done) {
     done(null, user[0].name);
   });
 });
-
-app.post(
-  "/login/",
-  passport.authenticate("local", {
-    session: true,
-  }),
-  (req, res) => {
-    res.send("login sucess");
-  }
-);
 
 app.post(
   "/login/",
