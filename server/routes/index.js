@@ -152,11 +152,11 @@ passport.serializeUser(function (user, done) {
 passport.deserializeUser(function (id, done) {
   console.log("deserializeUser");
   const sqlFind = `select * from user where id = ${id}; `;
-  db.query(sqlFind, (err, result) => {
+  db.query(sqlFind, (err, user) => {
     if (err) console.log(err);
-    console.log(`${result}:deserial`);
+    console.log(user[0]);
+    done(null, user[0].name);
   });
-  done(null, { name: username });
 });
 
 app.post(
@@ -165,13 +165,16 @@ app.post(
     session: true,
   }),
   (req, res) => {
-    const uid = req.user[0].id;
-    const sid = req.sessionID;
-    const sqlInsert = "INSERT session (sid,uid) values (?,?);";
-    db.query(sqlInsert, [sid, uid], (err, result) => {
-      if (err) console.log(err);
-      res.send(result);
-    });
+    res.send("login sucess");
+  }
+);
+
+app.post(
+  "/login/",
+  passport.authenticate("local", {
+    session: true,
+  }),
+  (req, res) => {
     res.send(req.user);
   }
 );
@@ -189,7 +192,6 @@ const options = {
 };
 
 const server = https.createServer(options, app);
-//ポートリッスン
 server.listen(port, () => {
   console.log(`listening at　port:${port}`);
 });

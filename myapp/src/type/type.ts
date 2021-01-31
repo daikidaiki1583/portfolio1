@@ -9,3 +9,7 @@ export type data = {
   trainingid: number;
   userid: number;
 };
+
+// export type User = {
+//   name: string
+// }

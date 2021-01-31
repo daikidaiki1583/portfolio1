@@ -6,7 +6,6 @@ const SignIn: FC = () => {
   const [password, setPassword] = useState<string>('');
   const [username, setUserneme] = useState<string>('');
 
-  // axios.getにもwithcredentialつける
   useEffect(() => {
     axios
       .get('/api/getuser/', {
