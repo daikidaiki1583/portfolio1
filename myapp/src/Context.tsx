@@ -1,3 +1,4 @@
+import { createSecureServer } from 'http2';
 import React, {
   useState,
   useEffect,
@@ -17,12 +18,12 @@ const Context = (props: PropsWithChildren<any>) => {
         withCredentials: true,
       })
       .then((result) => {
-        console.log(result);
+        setUser(user);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
-  return <myContext.Provider value={1000}>{props.children}</myContext.Provider>;
+  return <myContext.Provider value={user}>{props.children}</myContext.Provider>;
 };
 export default Context;

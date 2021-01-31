@@ -19,7 +19,7 @@ const db = mysql.createPool({
 app.use(
   cors({
     credentials: true,
-    origin: "https://kintrecord.link",
+    // origin: "https://kintrecord.link",
   })
 );
 
