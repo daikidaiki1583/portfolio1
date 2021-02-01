@@ -45,7 +45,9 @@ app.delete("/api/delete/:id", (req, res) => {
 
 app.get("/api/get/trainingrecord", (req, res) => {
   const { dt } = req.query;
-  const sqlSelect = `SELECT * FROM trainingrecord join training on trainingrecord.trainingid = training.tr_id where dt = "${dt}" order by createdAt`;
+  const { id } = req.user.id;
+  console.log(id);
+  const sqlSelect = `SELECT * FROM trainingrecord join training on trainingrecord.trainingid = training.tr_id where dt = "${dt}" AND id = ${id} order by createdAt`;
   db.query(sqlSelect, (err, result) => {
     if (err) console.log(err);
     res.send(result);
@@ -54,7 +56,7 @@ app.get("/api/get/trainingrecord", (req, res) => {
 
 app.get("/api/get/trainingrecord/graph", (req, res) => {
   const { start, end } = req.query;
-  const sqlSelect = `SELECT * FROM trainingrecord join training on trainingrecord.trainingid = training.tr_id where dt <= "${end}" and dt >= "${start}" order by createdAt`;
+  const sqlSelect = `SELECT * FROM trainingrecord join training on trainingrecord.trainingid = training.tr_id where dt <= "${end}" AND dt >= "${start}" order by createdAt`;
   db.query(sqlSelect, (err, result) => {
     if (err) console.log(err);
     res.send(result);
@@ -70,8 +72,8 @@ app.get("/api/get/trainingrecord/distinct/", (req, res) => {
   });
 });
 
-app.post("/api/insert/:userid/", (req, res) => {
-  const userid = req.params.userid;
+app.post("/api/insert/", (req, res) => {
+  const id = req.user.id;
   const { dt, trainingid, count } = req.body;
   const sqlInsert =
     "INSERT trainingrecord (userid,dt,trainingid,count) values (?,?,?,?);";

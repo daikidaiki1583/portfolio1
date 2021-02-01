@@ -19,6 +19,7 @@ const InputRecord: FC = () => {
     };
   }, []);
   /* eslint-enable arrow-body-style */
+
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCount(e.target.value);
   };
@@ -30,14 +31,20 @@ const InputRecord: FC = () => {
   const handleChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setTrainingid(parseInt(e.target.value, 10));
   };
+
   const handleSubmit = () => {
-    const userid = 1; // 動的に取得できるように修正する
     axios
-      .post(`/api/insert/${userid}/`, {
-        dt: date,
-        trainingid,
-        count,
-      })
+      .post(
+        `/api/insert/`,
+        {
+          dt: date,
+          trainingid,
+          count,
+        },
+        {
+          withCredentials: true,
+        },
+      )
       .then((response) => {
         if (response.status === 200) {
           setIsSend(true);

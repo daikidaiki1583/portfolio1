@@ -15,6 +15,7 @@ const TrainingList: FC<Props> = ({ date }) => {
   useEffect(() => {
     axios
       .get('/api/get/trainingrecord', {
+        withCredentials: true,
         params: {
           dt: date,
         },
