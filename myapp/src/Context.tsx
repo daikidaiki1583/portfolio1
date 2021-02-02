@@ -1,16 +1,33 @@
-import { createSecureServer } from 'http2';
 import React, {
   useState,
   useEffect,
+  useReducer,
   createContext,
   PropsWithChildren,
 } from 'react';
 import axios from './axios';
 
+const initialState = false;
+type Action = {
+  type: string;
+};
+
+const reducer = (state: boolean, action: Action) => {
+  switch (action.type) {
+    case 'login':
+      return true;
+    default:
+      throw new Error();
+  }
+};
+
 /* eslint-disable */
 export const myContext = createContext<any>({});
 const Context = (props: PropsWithChildren<any>) => {
   const [user, setUser] = useState<any>('');
+  const [state, dispatch] = useReducer(reducer, initialState);
+  console.log(state);
+  const value = { user, dispatch };
 
   useEffect(() => {
     axios
@@ -24,7 +41,10 @@ const Context = (props: PropsWithChildren<any>) => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
-  return <myContext.Provider value={user}>{props.children}</myContext.Provider>;
+  }, [state]);
+
+  return (
+    <myContext.Provider value={value}>{props.children}</myContext.Provider>
+  );
 };
 export default Context;

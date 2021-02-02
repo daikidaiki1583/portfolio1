@@ -1,8 +1,11 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useContext } from 'react';
 import Input from '../atoms/input';
 import axios from '../../axios';
+import { myContext } from '../../Context';
 
 const Login: FC = () => {
+  const { dispatch } = useContext(myContext);
+
   const [userid, setUserId] = useState<number>();
   const [password, setPassword] = useState<string>('');
   const [username, setUserneme] = useState<string>('');
@@ -26,8 +29,8 @@ const Login: FC = () => {
         withCredentials: true,
       })
       .then((response) => {
-        console.log(response.data[0].id);
         setUserId(response.data[0].id);
+        dispatch({ type: 'login' });
       })
       .catch((err) => {
         console.log(err);
