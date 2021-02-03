@@ -24,9 +24,8 @@ const reducer = (state: boolean, action: Action) => {
 /* eslint-disable */
 export const myContext = createContext<any>({});
 const Context = (props: PropsWithChildren<any>) => {
-  const [user, setUser] = useState<any>('');
+  const [user, setUser] = useState<any>(null);
   const [state, dispatch] = useReducer(reducer, initialState);
-  console.log(state);
   const value = { user, dispatch };
 
   useEffect(() => {

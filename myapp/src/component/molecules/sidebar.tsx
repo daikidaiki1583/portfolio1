@@ -4,11 +4,12 @@ import { myContext } from '../../Context';
 import './sidebar.scss';
 
 const Sidebar: FC = () => {
-  const ctx = useContext(myContext);
+  const { user } = useContext(myContext);
+  console.log(user);
 
   return (
     <nav className="sidebar">
-      {ctx ? (
+      {user ? (
         <>
           <Link to="/trainingView" className="link">
             <i className="fas fa-chart-line" />

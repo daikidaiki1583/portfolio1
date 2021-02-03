@@ -1,12 +1,13 @@
 import React, { FC, useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import Input from '../atoms/input';
 import axios from '../../axios';
 import { myContext } from '../../Context';
 
 const Login: FC = () => {
   const { dispatch } = useContext(myContext);
+  const history = useHistory();
 
-  const [userid, setUserId] = useState<number>();
   const [password, setPassword] = useState<string>('');
   const [username, setUserneme] = useState<string>('');
 
@@ -28,9 +29,9 @@ const Login: FC = () => {
       .post('/login/', data, {
         withCredentials: true,
       })
-      .then((response) => {
-        setUserId(response.data[0].id);
+      .then(() => {
         dispatch({ type: 'login' });
+        history.push('/');
       })
       .catch((err) => {
         console.log(err);
@@ -60,7 +61,6 @@ const Login: FC = () => {
       <button type="button" onClick={() => handleSubmit()}>
         ログイン
       </button>
-      <div>{userid}</div>
     </form>
   );
 };
