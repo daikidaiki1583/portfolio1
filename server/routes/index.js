@@ -9,10 +9,10 @@ const saltRounds = 10;
 
 const mysql = require("mysql");
 const db = mysql.createPool({
-  host: "ip-10-0-24-237.ap-northeast-1.compute.internal",
+  host: process.env.DBSERHOS,
   user: "guestuser",
   port: 3306,
-  password: "mfSndby1s#",
+  password: process.env.DBPASS,
   database: "training",
 });
 
@@ -73,11 +73,12 @@ app.get("/api/get/trainingrecord/distinct/", (req, res) => {
 });
 
 app.post("/api/insert/", (req, res) => {
-  const id = req.user.id;
+  const { id } = req.user.id;
+  console.log(id);
   const { dt, trainingid, count } = req.body;
   const sqlInsert =
     "INSERT trainingrecord (userid,dt,trainingid,count) values (?,?,?,?);";
-  db.query(sqlInsert, [userid, dt, trainingid, count], (err, result) => {
+  db.query(sqlInsert, [id, dt, trainingid, count], (err, result) => {
     if (err) console.log(err);
     res.send(result);
   });
@@ -168,8 +169,8 @@ app.post(
 );
 
 app.get("/api/getuser/", (req, res) => {
-  console.log(req);
-  res.send(req.user);
+  const { id, name } = req.user;
+  res.send({ id, name });
 });
 
 const https = require("https");
