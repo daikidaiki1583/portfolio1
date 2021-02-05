@@ -1,11 +1,12 @@
 import React, { FC, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import axios from '../../axios';
 import { myContext } from '../../Context';
 import './sidebar.scss';
 
 const Sidebar: FC = () => {
   const { user } = useContext(myContext);
+  const history = useHistory();
 
   const logout = () => {
     axios('/logout', {
@@ -13,6 +14,7 @@ const Sidebar: FC = () => {
     })
       .then((res) => {
         console.log(res);
+        history.push('/');
       })
       .catch((err) => {
         console.log(err);

@@ -167,6 +167,11 @@ app.get("/api/getuser/", (req, res) => {
   res.send({ id, name });
 });
 
+app.get("/logout", (req, res) => {
+  req.logOut();
+  res.send("logout");
+});
+
 //httpsサーバー
 const https = require("https");
 const fs = require("fs");
