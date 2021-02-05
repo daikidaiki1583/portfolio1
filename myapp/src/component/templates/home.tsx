@@ -1,6 +1,5 @@
-import React, { FC, useContext } from 'react';
+import React, { FC } from 'react';
 import Graph from '../organisms/graph';
-import { myContext } from '../../Context';
 
 const Home: FC = () => (
   <>

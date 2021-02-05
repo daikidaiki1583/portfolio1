@@ -1,8 +1,9 @@
-import React, { FC, useState, useMemo, useEffect } from 'react';
+import React, { FC, useState, useMemo, useEffect, useContext } from 'react';
 import SelectMenu from '../atoms/selectMenu';
 import Input from '../atoms/input';
 import calculateToday from '../../data/today';
 import axios from '../../axios';
+import { myContext } from '../../Context';
 import './inputRecord.scss';
 
 const InputRecord: FC = () => {

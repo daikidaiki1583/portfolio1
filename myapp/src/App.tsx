@@ -9,6 +9,7 @@ import InputRecord from './component/organisms/inputRecord';
 import Signin from './component/templates/Signin';
 import Login from './component/templates/Login';
 import Context from './Context';
+import Logout from './component/atoms/logout';
 
 const App: FC = () => (
   <div className="App">
@@ -34,6 +35,9 @@ const App: FC = () => (
             </Route>
             <Route path="/login">
               <Login />
+            </Route>
+            <Route path="/logout">
+              <Logout />
             </Route>
           </Switch>
         </div>

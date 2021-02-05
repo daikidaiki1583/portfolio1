@@ -1,5 +1,6 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect, useContext } from 'react';
 import axios from '../../axios';
+import { myContext } from '../../Context';
 import TrainingItem from '../molecules/trainingItem';
 import { data } from '../../type/type';
 import './trainingList.scss';
@@ -11,10 +12,11 @@ type Props = {
 const TrainingList: FC<Props> = ({ date }) => {
   const [trainingRecord, setTrainingRecord] = useState<data[]>([]);
   const [trainingMenu, setTrainingMenu] = useState<string[]>([]);
+  const { user } = useContext(myContext);
 
   useEffect(() => {
     axios
-      .get('/api/get/trainingrecord', {
+      .get(`/api/get/trainingrecord/`, {
         withCredentials: true,
         params: {
           dt: date,

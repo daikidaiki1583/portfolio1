@@ -1,13 +1,14 @@
 const express = require("express");
 const app = express();
-const port = 9000;
-
+const passport = require("passport");
+const Strategy = require("passport-local").Strategy;
+const session = require("express-session");
 const bodyparser = require("body-parser");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
-
 const mysql = require("mysql");
+
 const db = mysql.createPool({
   host: process.env.DBSERHOS,
   user: "guestuser",
@@ -26,6 +27,15 @@ app.use(
 app.use(express.json());
 app.use(bodyparser.json({ type: "application/json" }));
 app.use(bodyparser.urlencoded({ extended: true }));
+app.use(
+  session({
+    secret: "testing",
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.get("/api/get/training", (req, res) => {
   const sqlSelect = "SELECT * FROM training order by tr_id";
@@ -43,11 +53,12 @@ app.delete("/api/delete/:id", (req, res) => {
   });
 });
 
-app.get("/api/get/trainingrecord", (req, res) => {
-  const { dt } = req.query;
+app.get("/api/get/trainingrecord/", (req, res) => {
+  console.log(req.user.id);
   const { id } = req.user.id;
+  const { dt } = req.query;
   console.log(id);
-  const sqlSelect = `SELECT * FROM trainingrecord join training on trainingrecord.trainingid = training.tr_id where dt = "${dt}" AND id = ${id} order by createdAt`;
+  const sqlSelect = `SELECT * FROM trainingrecord join training on trainingrecord.trainingid = training.tr_id where dt = "${dt}" AND userid = ${id} order by createdAt`;
   db.query(sqlSelect, (err, result) => {
     if (err) console.log(err);
     res.send(result);
@@ -73,8 +84,7 @@ app.get("/api/get/trainingrecord/distinct/", (req, res) => {
 });
 
 app.post("/api/insert/", (req, res) => {
-  const { id } = req.user.id;
-  console.log(id);
+  const id = req.params.id;
   const { dt, trainingid, count } = req.body;
   const sqlInsert =
     "INSERT trainingrecord (userid,dt,trainingid,count) values (?,?,?,?);";
@@ -100,21 +110,6 @@ app.post("/signin/", (req, res) => {
     });
   });
 });
-// パスワード更新処理　追加必要
-
-const passport = require("passport");
-const Strategy = require("passport-local").Strategy;
-const session = require("express-session");
-
-app.use(
-  session({
-    secret: "testing",
-    resave: false,
-    saveUninitialized: true,
-  })
-);
-app.use(passport.initialize());
-app.use(passport.session());
 
 passport.use(
   new Strategy(
@@ -153,7 +148,6 @@ passport.deserializeUser(function (id, done) {
   const sqlFind = `select * from user where id = ${id}; `;
   db.query(sqlFind, (err, user) => {
     if (err) console.log(err);
-    console.log(user[0]);
     done(null, user[0]);
   });
 });
@@ -173,6 +167,7 @@ app.get("/api/getuser/", (req, res) => {
   res.send({ id, name });
 });
 
+//httpsサーバー
 const https = require("https");
 const fs = require("fs");
 const options = {
@@ -180,7 +175,7 @@ const options = {
   cert: fs.readFileSync("/etc/letsencrypt/archive/kintrecord.link/cert1.pem"),
   ca: fs.readFileSync("/etc/letsencrypt/archive/kintrecord.link/chain1.pem"),
 };
-
+const port = 9000;
 const server = https.createServer(options, app);
 server.listen(port, () => {
   console.log(`listening at　port:${port}`);

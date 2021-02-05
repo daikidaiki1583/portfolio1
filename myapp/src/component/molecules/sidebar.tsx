@@ -1,11 +1,23 @@
 import React, { FC, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import axios from '../../axios';
 import { myContext } from '../../Context';
 import './sidebar.scss';
 
 const Sidebar: FC = () => {
   const { user } = useContext(myContext);
-  console.log(user);
+
+  const logout = () => {
+    axios('/logout', {
+      withCredentials: true,
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <nav className="sidebar">
@@ -18,6 +30,10 @@ const Sidebar: FC = () => {
           <Link to="/inputRecord" className="link">
             <i className="fas fa-pencil-alt" />
             <span>記録する</span>
+          </Link>
+          <Link onClick={logout} to="/logout">
+            <i className="fas fa-sign-out-alt" />
+            <span>ログアウト</span>
           </Link>
         </>
       ) : (

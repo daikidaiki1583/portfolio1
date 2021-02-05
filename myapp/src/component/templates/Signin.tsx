@@ -1,19 +1,10 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import Input from '../atoms/input';
 import axios from '../../axios';
 
 const SignIn: FC = () => {
   const [password, setPassword] = useState<string>('');
   const [username, setUserneme] = useState<string>('');
-
-  // useEffect(() => {
-  //   axios
-  //     .get('/api/getuser/', {
-  //       withCredentials: true,
-  //     })
-  //     .then((response) => console.log(response))
-  //     .catch((err) => console.log(err));
-  // }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     if (e.target.id === 'username') {
