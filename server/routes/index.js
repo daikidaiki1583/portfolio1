@@ -54,10 +54,8 @@ app.delete("/api/delete/:id", (req, res) => {
 });
 
 app.get("/api/get/trainingrecord/", (req, res) => {
-  console.log(req.user.id);
-  const { id } = req.user.id;
+  const { id } = req.user;
   const { dt } = req.query;
-  console.log(id);
   const sqlSelect = `SELECT * FROM trainingrecord join training on trainingrecord.trainingid = training.tr_id where dt = "${dt}" AND userid = ${id} order by createdAt`;
   db.query(sqlSelect, (err, result) => {
     if (err) console.log(err);
@@ -84,7 +82,7 @@ app.get("/api/get/trainingrecord/distinct/", (req, res) => {
 });
 
 app.post("/api/insert/", (req, res) => {
-  const id = req.params.id;
+  const { id } = req.user;
   const { dt, trainingid, count } = req.body;
   const sqlInsert =
     "INSERT trainingrecord (userid,dt,trainingid,count) values (?,?,?,?);";
