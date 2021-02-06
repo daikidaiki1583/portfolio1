@@ -163,8 +163,12 @@ app.post(
 );
 
 app.get("/api/getuser/", (req, res) => {
-  const { id, name } = req.user;
-  res.send({ id, name });
+  if (req.user) {
+    const { id, name } = req.user;
+    res.send({ id, name });
+  } else {
+    res.send(null);
+  }
 });
 
 app.get("/logout", (req, res) => {

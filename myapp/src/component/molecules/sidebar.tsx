@@ -5,7 +5,7 @@ import { myContext } from '../../Context';
 import './sidebar.scss';
 
 const Sidebar: FC = () => {
-  const { user } = useContext(myContext);
+  const { user, dispatch } = useContext(myContext);
   const history = useHistory();
 
   const logout = () => {
@@ -14,6 +14,7 @@ const Sidebar: FC = () => {
     })
       .then((res) => {
         console.log(res);
+        dispatch({ type: 'logout' });
         history.push('/');
       })
       .catch((err) => {

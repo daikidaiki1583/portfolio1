@@ -16,6 +16,8 @@ const reducer = (state: boolean, action: Action) => {
   switch (action.type) {
     case 'login':
       return true;
+    case 'logout':
+      return false;
     default:
       throw new Error();
   }
