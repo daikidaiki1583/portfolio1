@@ -11,7 +11,7 @@ import Context, { myContext } from './Context';
 import Logout from './component/atoms/logout';
 
 const App: FC = () => {
-  const user = useContext(myContext);
+  const { user } = useContext(myContext);
 
   return (
     <div className="App">

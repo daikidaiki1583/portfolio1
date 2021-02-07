@@ -4,10 +4,11 @@ import './home.scss';
 import { myContext } from '../../Context';
 
 const Home: FC = () => {
-  const user = useContext(myContext);
+  const { user } = useContext(myContext);
 
   return (
     <div className="component">
+      {console.log(user)}
       {user ? (
         <div>ログイン状態</div>
       ) : (
