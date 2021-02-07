@@ -1,9 +1,8 @@
-import React, { FC, useState, useMemo, useEffect, useContext } from 'react';
+import React, { FC, useState, useMemo, useEffect } from 'react';
 import SelectMenu from '../atoms/selectMenu';
 import Input from '../atoms/input';
 import calculateToday from '../../data/today';
 import axios from '../../axios';
-import { myContext } from '../../Context';
 import './inputRecord.scss';
 
 const InputRecord: FC = () => {
@@ -58,31 +57,33 @@ const InputRecord: FC = () => {
   };
 
   return (
-    <form>
-      <SelectMenu value={trainingid} handleChange={handleChangeSelect} />
+    <div className="component">
+      <form>
+        <SelectMenu value={trainingid} handleChange={handleChangeSelect} />
 
-      <Input
-        id="count"
-        type="number"
-        value={count}
-        handleChange={handleChangeInput}
-        placeholder="回数 "
-      />
+        <Input
+          id="count"
+          type="number"
+          value={count}
+          handleChange={handleChangeInput}
+          placeholder="回数 "
+        />
 
-      <Input
-        id="date"
-        type="date"
-        value={date}
-        handleChange={handleChangeDate}
-      />
-      <button type="button" onClick={handleSubmit}>
-        記録する
-      </button>
-      <div className={`success ${isSend ? 'add' : ''}`}>
-        {isSend}
-        記録に成功しました。
-      </div>
-    </form>
+        <Input
+          id="date"
+          type="date"
+          value={date}
+          handleChange={handleChangeDate}
+        />
+        <button type="button" onClick={handleSubmit}>
+          記録する
+        </button>
+        <div className={`success ${isSend ? 'add' : ''}`}>
+          {isSend}
+          記録に成功しました。
+        </div>
+      </form>
+    </div>
   );
 };
 

@@ -14,7 +14,7 @@ const TrainingView: FC = () => {
   };
 
   return (
-    <div className="trainingview">
+    <div className="trainingview component">
       <h1>筋トレ記録</h1>
       <div className="date">
         <button

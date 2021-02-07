@@ -9,14 +9,12 @@
 }
 
 form{
-    width: 100%;
     margin:0 auto;
     display: flex;
     flex-direction: column;
 
     label{
         width: 50%;
-        margin: 8px auto;
         select{
             @include form;
         }

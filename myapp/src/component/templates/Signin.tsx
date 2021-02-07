@@ -24,7 +24,6 @@ const SignIn: FC = () => {
         switch (response.data.sqlState) {
           case '23000':
             console.log('そのユーザー名はすでに使用されています');
-            // エラー内容を表示させてわかるようにする
             break;
           default:
         }
@@ -55,7 +54,7 @@ const SignIn: FC = () => {
         placeholder="パスワード"
       />
       <button type="button" onClick={() => handleSubmit()}>
-        サインイン
+        ユーザー登録
       </button>
     </form>
   );

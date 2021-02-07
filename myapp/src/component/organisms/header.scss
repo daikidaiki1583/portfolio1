@@ -1,0 +1,22 @@
+@import '../../color.scss';
+
+header{
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10%;
+    .title{
+
+        font-weight: bold;
+        font-size:28px;
+        margin:24px 0 8px 40px;
+        a{
+            color: $gold;
+        }
+    }
+
+    .side{
+        margin:24px 40px 8px 0px;
+
+    }
+}

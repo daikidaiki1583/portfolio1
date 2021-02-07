@@ -2,9 +2,9 @@ import React, { FC, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import axios from '../../axios';
 import { myContext } from '../../Context';
-import './sidebar.scss';
+import './navigation.scss';
 
-const Sidebar: FC = () => {
+const Navi: FC = () => {
   const { user, dispatch } = useContext(myContext);
   const history = useHistory();
 
@@ -13,9 +13,9 @@ const Sidebar: FC = () => {
       withCredentials: true,
     })
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         dispatch({ type: 'logout' });
-        history.push('/');
+        history.push('/logout');
       })
       .catch((err) => {
         console.log(err);
@@ -23,7 +23,7 @@ const Sidebar: FC = () => {
   };
 
   return (
-    <nav className="sidebar">
+    <nav className="navigation">
       {user ? (
         <>
           <Link to="/trainingView" className="link">
@@ -34,17 +34,13 @@ const Sidebar: FC = () => {
             <i className="fas fa-pencil-alt" />
             <span>記録する</span>
           </Link>
-          <Link onClick={logout} to="/logout">
+          <Link to="/logout" className="link" onClick={logout}>
             <i className="fas fa-sign-out-alt" />
             <span>ログアウト</span>
           </Link>
         </>
       ) : (
         <>
-          <Link to="/signin" className="link">
-            <i className="fas fa-user-alt" />
-            <span>サインイン</span>
-          </Link>
           <Link to="/login" className="link">
             <i className="fas fa-sign-in-alt" />
             <span>ログイン</span>
@@ -54,4 +50,4 @@ const Sidebar: FC = () => {
     </nav>
   );
 };
-export default Sidebar;
+export default Navi;
