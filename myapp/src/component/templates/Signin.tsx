@@ -29,9 +29,9 @@ const SignIn: FC = () => {
             setUsed(() => true);
             break;
           default:
+            setUserneme('');
+            setPassword('');
         }
-        setUserneme('');
-        setPassword('');
       })
       .catch((err) => {
         console.log(err);
