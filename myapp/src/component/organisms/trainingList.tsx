@@ -46,7 +46,7 @@ const TrainingList: FC<Props> = ({ date }) => {
       {trainingRecord.length ? (
         [...new Set(trainingMenu)].map((menu) => (
           <ul className="training-list" key={menu}>
-            <h1>{menu}</h1>
+            <h2>{menu}</h2>
             <TrainingItem
               menu={menu}
               record={trainingRecord}

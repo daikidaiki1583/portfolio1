@@ -12,7 +12,7 @@ const Home: FC = () => {
       {user ? (
         <div>ログイン状態</div>
       ) : (
-        <div className="home component">
+        <div className="home">
           <p>
             ユーザー登録をすると、日々の筋トレを記録できたり、他のユーザーの筋トレ記録が見えます。
             <br />

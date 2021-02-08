@@ -7,7 +7,7 @@ import TrainingView from './component/templates/trainingVIew';
 import InputRecord from './component/organisms/inputRecord';
 import Login from './component/templates/Login';
 import NotFound from './component/atoms/NotFound';
-import Context, { myContext } from './Context';
+import { myContext } from './Context';
 import Logout from './component/atoms/logout';
 
 const App: FC = () => {
@@ -15,44 +15,46 @@ const App: FC = () => {
 
   return (
     <div className="App">
-      <Context>
-        <Header />
-        <div className="body">
-          <div className="main">
-            {user ? (
-              <Switch>
-                <Route exact path="/">
-                  <Home />
-                </Route>
-                <Route path="/inputRecord">
-                  <InputRecord />
-                </Route>
-                <Route path="/trainingview">
-                  <TrainingView />
-                </Route>
-                <Route path="/logout">
-                  <Logout />
-                </Route>
-                <Route>
-                  <NotFound />
-                </Route>
-              </Switch>
-            ) : (
-              <Switch>
-                <Route exact path="/">
-                  <Home />
-                </Route>
-                <Route path="/login">
-                  <Login />
-                </Route>
-                <Route>
-                  <NotFound />
-                </Route>
-              </Switch>
-            )}
-          </div>
+      <Header />
+      <div className="body">
+        <div className="main">
+          {user ? (
+            <Switch>
+              <Route exact path="/">
+                <Home />
+              </Route>
+
+              <Route path="/inputRecord">
+                <InputRecord />
+              </Route>
+
+              <Route path="/trainingview">
+                <TrainingView />
+              </Route>
+
+              <Route>
+                <NotFound />
+              </Route>
+            </Switch>
+          ) : (
+            <Switch>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route path="/login">
+                <Login />
+              </Route>
+              <Route path="/logout">
+                <Logout />
+              </Route>
+
+              <Route>
+                <NotFound />
+              </Route>
+            </Switch>
+          )}
         </div>
-      </Context>
+      </div>
     </div>
   );
 };

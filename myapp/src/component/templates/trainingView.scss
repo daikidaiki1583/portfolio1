@@ -1,7 +1,10 @@
+@import '../../color.scss';
+
 .trainingview{
 
     h1{
         text-align: center;
+        color: $gold;
     }
 
     .date{

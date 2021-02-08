@@ -15,6 +15,8 @@ const Navi: FC = () => {
       .then((res) => {
         console.log(res.data);
         dispatch({ type: 'logout' });
+      })
+      .then(() => {
         history.push('/logout');
       })
       .catch((err) => {
