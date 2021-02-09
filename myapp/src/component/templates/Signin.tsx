@@ -1,6 +1,8 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import Input from '../atoms/input';
 import axios from '../../axios';
+import { myContext } from '../../Context';
 import './SignIn.scss';
 
 const SignIn: FC = () => {
@@ -17,25 +19,34 @@ const SignIn: FC = () => {
     }
   };
 
-  const handleSubmit = (): void => {
-    axios
-      .post('/signin/', {
+  const history = useHistory();
+  const { dispatch } = useContext(myContext);
+  const handleSubmit = async () => {
+    try {
+      const res = await axios.post('/signin/', {
         password,
         username,
-      })
-      .then((response) => {
-        switch (response.data.sqlState) {
-          case '23000':
-            setUsed(() => true);
-            break;
-          default:
-            setUserneme('');
-            setPassword('');
-        }
-      })
-      .catch((err) => {
-        console.log(err);
       });
+
+      switch (res.data.sqlState) {
+        case '23000':
+          setUsed(() => true);
+          break;
+        default:
+          await axios.post(
+            '/login',
+            { username, password },
+            {
+              withCredentials: true,
+            },
+          );
+          dispatch({ type: 'login' });
+          history.push('/');
+          break;
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   // パスワード確認用フォーム追加 サーバーからレスポンスに応じてリダイレクト作成 passport.jsで認証作成
