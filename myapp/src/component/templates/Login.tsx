@@ -69,8 +69,11 @@ const Login: FC = () => {
             placeholder="パスワード"
           />
         </div>
-
-        <button type="button" onClick={() => handleSubmit()}>
+        <button
+          type="button"
+          disabled={!(password && username)}
+          onClick={() => handleSubmit()}
+        >
           ログイン
         </button>
       </form>

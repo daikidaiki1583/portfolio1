@@ -21,6 +21,7 @@ const Input: FC<Props> = ({ type, value, handleChange, id, placeholder }) => {
       <input
         type={type === 'password' ? (visible ? 'type' : type) : type}
         id={id}
+        minLength={type === 'password' ? 6 : undefined}
         value={value}
         onChange={handleChange}
         placeholder={placeholder}

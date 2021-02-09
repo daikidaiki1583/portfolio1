@@ -1,12 +1,19 @@
+@import 'color.scss';
+
 * {
   list-style: none;
   box-sizing: border-box;
-
+  font-size: 1.6rem;
 }
 
 .body{
   margin: 0 20%;
   text-align: center;
+  button{
+    background-color: $gold;     
+    border-radius: 5px;
+    cursor: pointer;
+  }
 
   .main{
     padding: 8px;

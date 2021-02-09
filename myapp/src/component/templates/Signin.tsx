@@ -59,7 +59,12 @@ const SignIn: FC = () => {
           handleChange={handleChange}
           placeholder="パスワード"
         />
-        <button type="button" onClick={() => handleSubmit()}>
+
+        <button
+          type="button"
+          disabled={!(password && username)}
+          onClick={() => handleSubmit()}
+        >
           ユーザー登録
         </button>
       </form>

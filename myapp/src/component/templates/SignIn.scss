@@ -1,6 +1,7 @@
 @import '../../color.scss';
 
 .signin{
+
     .error{
         opacity: 0;
         width: 50%;
@@ -14,19 +15,9 @@
         &.add{
             opacity: 1.0;
             transition: 3s;
-
-            // animation-name: fulffy;
-            // animation-duration: 3s;
         }
     }
-    
-    // @keyframes fulffy {
-    //     0% {opacity: 0;}
-    //     20% {opacity: 100;}
-    //     80% {opacity: 100;}
-    //     100% {opacity: 0;}
-    
-    // }
+
     
 }
 
