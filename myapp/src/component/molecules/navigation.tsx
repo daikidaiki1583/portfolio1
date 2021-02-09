@@ -40,6 +40,7 @@ const Navi: FC = () => {
             <i className="fas fa-sign-out-alt" />
             <span>ログアウト</span>
           </Link>
+          <div className="link">{/* {user.name} */}</div>
         </>
       ) : (
         <>

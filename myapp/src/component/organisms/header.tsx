@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Navi from '../molecules/navigation';
 import './header.scss';
@@ -8,7 +8,8 @@ const Header: FC = () => (
     <div className="title">
       <Link to="/">筋トレコード</Link>
     </div>
-    <div className="side">
+
+    <div className="navi">
       <Navi />
     </div>
   </header>

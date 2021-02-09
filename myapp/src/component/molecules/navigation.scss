@@ -7,14 +7,10 @@
     .link{
         margin: 10px;
         color: $gold;
-
-
+        display: flex;
         .fas{
             font-size: 24px;
             margin: 0 8px;
-        }
-        span{
-           height: 24px;
         }
     }
 
