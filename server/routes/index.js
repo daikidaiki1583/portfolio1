@@ -56,7 +56,7 @@ app.delete("/api/delete/:id", (req, res) => {
 app.get("/api/get/trainingrecord/", (req, res) => {
   const { id } = req.user;
   const { dt } = req.query;
-  const sqlSelect = `SELECT * FROM trainingrecord join training on trainingrecord.trainingid = training.tr_id where dt = "${dt}" AND userid = ${id} order by createdAt`;
+  const sqlSelect = `SELECT menu,count FROM trainingrecord join training on trainingrecord.trainingid = training.tr_id where dt = "${dt}" AND userid = ${id} order by createdAt`;
   db.query(sqlSelect, (err, result) => {
     if (err) console.log(err);
     res.send(result);

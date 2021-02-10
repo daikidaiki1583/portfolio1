@@ -37,7 +37,7 @@ const TrainingView: FC = () => {
           ＞
         </button>
       </div>
-      <TrainingList date={date} />
+      <TrainingList date={date} mode="user" />
     </div>
   );
 };

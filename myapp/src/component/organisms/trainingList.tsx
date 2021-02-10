@@ -6,15 +6,20 @@ import './trainingList.scss';
 
 type Props = {
   date: string;
+  mode: string;
 };
 
-const TrainingList: FC<Props> = ({ date }) => {
+const TrainingList: FC<Props> = ({ date, mode }) => {
   const [trainingRecord, setTrainingRecord] = useState<data[]>([]);
   const [trainingMenu, setTrainingMenu] = useState<string[]>([]);
+  const path =
+    mode === 'user'
+      ? `/api/get/trainingrecord/`
+      : `/api/get/trainingrecord/all`;
 
   useEffect(() => {
     axios
-      .get(`/api/get/trainingrecord/`, {
+      .get(path, {
         withCredentials: true,
         params: {
           dt: date,
@@ -29,7 +34,7 @@ const TrainingList: FC<Props> = ({ date }) => {
         );
       })
       .catch((err) => console.log(err));
-  }, [date]);
+  }, [date, path]);
 
   const deleteRecord = (id: number) => {
     axios.delete(`/api/delete/${id}`);

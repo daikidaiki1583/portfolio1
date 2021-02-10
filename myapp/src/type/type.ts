@@ -8,6 +8,7 @@ export type data = {
   tr_id: number;
   trainingid: number;
   userid: number;
+  name?: string;
 };
 
 // export type User = {
