@@ -54,9 +54,18 @@ app.delete("/api/delete/:id", (req, res) => {
 });
 
 app.get("/api/get/trainingrecord/", (req, res) => {
-  const { id } = req.user;
+  const { uid } = req.user;
   const { dt } = req.query;
-  const sqlSelect = `SELECT menu,count FROM trainingrecord join training on trainingrecord.trainingid = training.tr_id where dt = "${dt}" AND userid = ${id} order by createdAt`;
+  const sqlSelect = `SELECT id,name,menu,count FROM trainingrecord as tr inner join user as u on tr.userid = u.uid inner join training as t on tr.trainingid = t.tr_id where dt = "${dt}" AND userid = ${uid} order by createdAt`;
+  db.query(sqlSelect, (err, result) => {
+    if (err) console.log(err);
+    res.send(result);
+  });
+});
+
+app.get("/api/get/trainingrecord/alluser", (req, res) => {
+  const { dt } = req.query;
+  const sqlSelect = `SELECT id,name,menu,count FROM trainingrecord as tr inner join user as u on tr.userid = u.uid inner join training as t on tr.trainingid = t.tr_id where dt = "${dt}" order by createdAt desc;`;
   db.query(sqlSelect, (err, result) => {
     if (err) console.log(err);
     res.send(result);
@@ -82,11 +91,11 @@ app.get("/api/get/trainingrecord/distinct/", (req, res) => {
 });
 
 app.post("/api/insert/", (req, res) => {
-  const { id } = req.user;
+  const { uid } = req.user;
   const { dt, trainingid, count } = req.body;
   const sqlInsert =
     "INSERT trainingrecord (userid,dt,trainingid,count) values (?,?,?,?);";
-  db.query(sqlInsert, [id, dt, trainingid, count], (err, result) => {
+  db.query(sqlInsert, [uid, dt, trainingid, count], (err, result) => {
     if (err) console.log(err);
     res.send(result);
   });
@@ -138,12 +147,12 @@ passport.use(
 
 passport.serializeUser(function (user, done) {
   console.log("serializeUser");
-  done(null, user[0].id);
+  done(null, user[0].uid);
 });
 
 passport.deserializeUser(function (id, done) {
   console.log("deserializeUser");
-  const sqlFind = `select * from user where id = ${id}; `;
+  const sqlFind = `select * from user where uid = ${id}; `;
   db.query(sqlFind, (err, user) => {
     if (err) console.log(err);
     done(null, user[0]);
@@ -162,8 +171,8 @@ app.post(
 
 app.get("/api/getuser/", (req, res) => {
   if (req.user) {
-    const { id, name } = req.user;
-    res.send({ id, name });
+    const { uid, name } = req.user;
+    res.send({ uid, name });
   } else {
     res.send(null);
   }

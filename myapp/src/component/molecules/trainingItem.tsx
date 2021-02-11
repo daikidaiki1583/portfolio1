@@ -6,15 +6,16 @@ type Props = {
   record: dataType[];
   menu: string;
   handledelete: (id: number) => void;
+  mode: string;
 };
 
-const TrainingItem: FC<Props> = ({ record, menu, handledelete }) => (
+const TrainingItem: FC<Props> = ({ record, menu, handledelete, mode }) => (
   <table>
     <thead>
       <tr className="header">
         <th>セット数</th>
         <th>回数</th>
-        <th> </th>
+        {mode === 'all' ? null : <th> </th>}
       </tr>
     </thead>
     <tbody>
@@ -24,11 +25,13 @@ const TrainingItem: FC<Props> = ({ record, menu, handledelete }) => (
           <tr key={prev.id}>
             <td>{index + 1}</td>
             <td className="row">{prev.count} 回</td>
-            <td>
-              <button type="button" onClick={() => handledelete(prev.id)}>
-                削除
-              </button>
-            </td>
+            {mode === 'all' ? null : (
+              <td>
+                <button type="button" onClick={() => handledelete(prev.id)}>
+                  削除
+                </button>
+              </td>
+            )}
           </tr>
         ))}
     </tbody>

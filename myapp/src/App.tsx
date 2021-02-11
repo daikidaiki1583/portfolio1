@@ -29,7 +29,7 @@ const App: FC = () => {
               </Route>
 
               <Route path="/trainingview">
-                <TrainingView />
+                <TrainingView mode="user" />
               </Route>
 
               <Route path="/logout">

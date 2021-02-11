@@ -9,3 +9,11 @@
         margin: 0;
     }
 }
+
+.alluser-list{
+    display: flex;
+    flex-wrap: wrap;
+    .user-record{
+        width: 50%;
+    }
+}
