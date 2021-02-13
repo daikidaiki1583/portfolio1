@@ -9,7 +9,6 @@ const Home: FC = () => {
 
   return (
     <>
-      {console.log(user)}
       {user ? (
         <TraingVIew mode="all" />
       ) : (

@@ -17,7 +17,15 @@
             transition: 3s;
         }
     }
-
-    
 }
+
+@media (max-width:599px) {
+
+    .signin{
+        .error{
+            width: auto;
+        } 
+     
+    }
+  }
 

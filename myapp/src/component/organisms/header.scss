@@ -19,3 +19,28 @@ header{
     }
 
 }
+
+@media (max-width:599px) {
+
+    header{
+        margin: 0;
+        justify-content: center;
+        align-items: center;
+
+        .title{
+            margin: 0;
+
+        }
+        .navi{  
+            width: 100%;
+            position: fixed;
+            background: $gold;
+            color: black;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            margin: 0;
+        }        
+    }
+
+}

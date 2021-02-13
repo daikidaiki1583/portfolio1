@@ -40,3 +40,15 @@ a{
   color: black;
 }
 
+@media (max-width:599px) {
+  .body{
+    margin: 0 24px;
+
+    .main{
+      padding: 8px 0;
+      .component{
+        padding: 8px;
+      }
+    }
+  } 
+}
