@@ -24,14 +24,14 @@ const reducer = (state: boolean, action: Action) => {
 };
 
 type User = {
-  uid: number;
-  name: string;
+  uid?: number;
+  name?: string;
 };
 
 /* eslint-disable */
 export const myContext = createContext<any>({});
 const Context = (props: PropsWithChildren<any>) => {
-  const [user, setUser] = useState<User>({ uid: 0, name: '' });
+  const [user, setUser] = useState<User | null>(null);
   const [state, dispatch] = useReducer(reducer, initialState);
   const [pageHeight, setHeight] = useState<number>(0);
   const [checkHeight, setCheckHeight] = useState<boolean>(false);
