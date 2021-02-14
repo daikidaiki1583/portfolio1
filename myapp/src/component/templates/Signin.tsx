@@ -2,7 +2,7 @@ import React, { FC, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import Input from '../atoms/input';
 import axios from '../../axios';
-import { myContext } from '../../Context';
+import { myContext } from '../../context/Context';
 import './SignIn.scss';
 
 const SignIn: FC = () => {

@@ -2,7 +2,7 @@ import React, { FC, useContext } from 'react';
 import SiginIn from './Signin';
 import TraingVIew from './trainingVIew';
 import './home.scss';
-import { myContext } from '../../Context';
+import { myContext } from '../../context/Context';
 
 const Home: FC = () => {
   const { user } = useContext(myContext);

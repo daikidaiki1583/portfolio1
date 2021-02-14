@@ -23,3 +23,12 @@
         border-radius: 5px;
     }
 }
+
+@media (max-width:599px) {
+    .alluser-list{
+     
+        .user-record{
+            width: 100%;     
+        }
+    }   
+}

@@ -40,7 +40,20 @@ header{
             left: 50%;
             transform: translateX(-50%);
             margin: 0;
+            transition: 0.3s;
         }        
     }
 
+}
+
+@media (max-width:599px) {
+    header{
+        .hide{
+            bottom: 0;
+            left: 0;
+            transform:auto;
+            transform:translateY(100%);
+            transition: 0.3s;
+        }
+    }
 }

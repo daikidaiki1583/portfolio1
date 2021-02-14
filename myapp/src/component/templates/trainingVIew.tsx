@@ -1,4 +1,4 @@
-import React, { FC, useState, useMemo } from 'react';
+import React, { FC, useState, useMemo, useEffect } from 'react';
 import TrainingList from '../organisms/trainingList';
 import Input from '../atoms/input';
 import calculateToday from '../../data/today';
@@ -11,14 +11,13 @@ type Props = {
 const TrainingView: FC<Props> = ({ mode }) => {
   const today = useMemo(() => calculateToday(), []);
   const [date, setInputDate] = useState<string>(today);
-  // const [date, setInputDate] = useState<string>(today);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setInputDate(e.target.value);
   };
 
   return (
-    <div className="trainingview component">
+    <div id="test" className="trainingview component">
       <h1>筋トレ記録</h1>
       <div className="date">
         <button type="button" className="minus">
@@ -30,11 +29,32 @@ const TrainingView: FC<Props> = ({ mode }) => {
           ＞
         </button>
       </div>
-      {mode === 'user' ? (
+      <div>
+        <p>test</p>
+        <p>test</p>
+        <p>test</p>
+        <p>test</p>
+        <p>test</p>
+        <p>test</p>
+        <p>test</p>
+        <p>test</p>
+        <p>test</p>
+        <p>test</p>
+        <p>test</p>
+        <p>test</p>
+        <p>test</p>
+        <p>test</p>
+        <p>test</p>
+        <p>test</p>
+        <p>test</p>
+        <p>test</p>
+        <p>test</p>
+      </div>
+      {/* {mode === 'user' ? (
         <TrainingList date={date} mode="user" />
       ) : (
         <TrainingList date={date} mode="all" />
-      )}
+      )} */}
     </div>
   );
 };

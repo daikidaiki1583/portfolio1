@@ -7,7 +7,7 @@ import TrainingView from './component/templates/trainingVIew';
 import InputRecord from './component/organisms/inputRecord';
 import Login from './component/templates/Login';
 import NotFound from './component/atoms/NotFound';
-import { myContext } from './Context';
+import { myContext } from './context/Context';
 import Logout from './component/atoms/logout';
 
 const App: FC = () => {
@@ -18,7 +18,7 @@ const App: FC = () => {
       <Header />
       <div className="body">
         <div className="main">
-          {user ? (
+          {!user ? (
             <Switch>
               <Route exact path="/">
                 <Home />

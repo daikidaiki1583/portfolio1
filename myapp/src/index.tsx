@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';
-import Context from './Context';
+import Context from './context/Context';
 import App from './App';
 
 ReactDOM.render(

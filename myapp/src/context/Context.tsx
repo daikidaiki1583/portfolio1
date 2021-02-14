@@ -5,7 +5,7 @@ import React, {
   createContext,
   PropsWithChildren,
 } from 'react';
-import axios from './axios';
+import axios from '../axios';
 
 const initialState = false;
 type Action = {
@@ -28,7 +28,22 @@ export const myContext = createContext<any>({});
 const Context = (props: PropsWithChildren<any>) => {
   const [user, setUser] = useState<any>(null);
   const [state, dispatch] = useReducer(reducer, initialState);
-  const value = { user, dispatch };
+  const [pageHeight, setHeight] = useState<number>(0);
+  const [checkHeight, setCheckHeight] = useState<boolean>(false);
+  const value = { user, dispatch, checkHeight };
+
+  useEffect(() => {
+    setHeight(document.body.scrollHeight - document.body.offsetHeight);
+
+    const measure = () => {
+      if (window.scrollY === pageHeight) {
+        setCheckHeight(true);
+      } else {
+        setCheckHeight(false);
+      }
+    };
+    window.addEventListener('scroll', measure, true);
+  }, [pageHeight, checkHeight]);
 
   useEffect(() => {
     axios

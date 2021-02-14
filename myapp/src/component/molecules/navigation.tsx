@@ -1,7 +1,7 @@
 import React, { FC, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import axios from '../../axios';
-import { myContext } from '../../Context';
+import { myContext } from '../../context/Context';
 import './navigation.scss';
 
 const Navi: FC = () => {
@@ -26,7 +26,7 @@ const Navi: FC = () => {
 
   return (
     <nav className="navigation">
-      {user ? (
+      {!user ? (
         <>
           <Link to="/trainingView" className="link">
             <i className="fas fa-chart-line" />
