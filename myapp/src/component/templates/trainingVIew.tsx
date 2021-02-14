@@ -1,4 +1,5 @@
 import React, { FC, useState, useMemo, useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import TrainingList from '../organisms/trainingList';
 import Input from '../atoms/input';
 import calculateToday from '../../data/today';
@@ -18,6 +19,9 @@ const TrainingView: FC<Props> = ({ mode }) => {
 
   return (
     <div id="test" className="trainingview component">
+      <Helmet>
+        <title>トレーニング履歴</title>
+      </Helmet>
       <h1>筋トレ記録</h1>
       <div className="date">
         <button type="button" className="minus">
@@ -29,32 +33,11 @@ const TrainingView: FC<Props> = ({ mode }) => {
           ＞
         </button>
       </div>
-      <div>
-        <p>test</p>
-        <p>test</p>
-        <p>test</p>
-        <p>test</p>
-        <p>test</p>
-        <p>test</p>
-        <p>test</p>
-        <p>test</p>
-        <p>test</p>
-        <p>test</p>
-        <p>test</p>
-        <p>test</p>
-        <p>test</p>
-        <p>test</p>
-        <p>test</p>
-        <p>test</p>
-        <p>test</p>
-        <p>test</p>
-        <p>test</p>
-      </div>
-      {/* {mode === 'user' ? (
+      {mode === 'user' ? (
         <TrainingList date={date} mode="user" />
       ) : (
         <TrainingList date={date} mode="all" />
-      )} */}
+      )}
     </div>
   );
 };

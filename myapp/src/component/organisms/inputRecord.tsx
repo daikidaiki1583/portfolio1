@@ -1,4 +1,5 @@
 import React, { FC, useState, useMemo, useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import SelectMenu from '../atoms/selectMenu';
 import Input from '../atoms/input';
 import calculateToday from '../../data/today';
@@ -58,6 +59,9 @@ const InputRecord: FC = () => {
 
   return (
     <div className="component">
+      <Helmet>
+        <title>記録する</title>
+      </Helmet>
       <form>
         <SelectMenu value={trainingid} handleChange={handleChangeSelect} />
 

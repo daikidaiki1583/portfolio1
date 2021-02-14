@@ -18,7 +18,7 @@ const App: FC = () => {
       <Header />
       <div className="body">
         <div className="main">
-          {!user ? (
+          {user ? (
             <Switch>
               <Route exact path="/">
                 <Home />

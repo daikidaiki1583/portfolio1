@@ -1,4 +1,5 @@
 import React, { FC, useState, useContext } from 'react';
+import { Helmet } from 'react-helmet';
 import { useHistory } from 'react-router-dom';
 import Input from '../atoms/input';
 import axios from '../../axios';
@@ -49,6 +50,10 @@ const Login: FC = () => {
   // パスワード確認用フォーム追加 サーバーからレスポンスに応じてリダイレクト作成 passport.jsで認証作成
   return (
     <div className="component">
+      <Helmet>
+        <title>ログイン</title>
+      </Helmet>
+
       <h1>さぁ、筋トレの時間だ</h1>
       <form action="">
         <div className="username">

@@ -1,4 +1,5 @@
 import React, { FC, useState, useContext } from 'react';
+import { Helmet } from 'react-helmet';
 import { useHistory } from 'react-router-dom';
 import Input from '../atoms/input';
 import axios from '../../axios';
@@ -49,9 +50,12 @@ const SignIn: FC = () => {
     }
   };
 
-  // パスワード確認用フォーム追加 サーバーからレスポンスに応じてリダイレクト作成 passport.jsで認証作成
   return (
     <div className="signin">
+      <Helmet>
+        <title>サインイン</title>
+      </Helmet>
+
       <div className={`error ${used ? 'add' : ''}`}>
         そのユーザー名は既に使用されています。
       </div>

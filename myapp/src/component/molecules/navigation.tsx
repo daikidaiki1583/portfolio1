@@ -26,7 +26,7 @@ const Navi: FC = () => {
 
   return (
     <nav className="navigation">
-      {!user ? (
+      {user ? (
         <>
           <Link to="/trainingView" className="link">
             <i className="fas fa-chart-line" />

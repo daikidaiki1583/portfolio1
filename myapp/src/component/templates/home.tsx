@@ -1,4 +1,5 @@
 import React, { FC, useContext } from 'react';
+import { Helmet } from 'react-helmet';
 import SiginIn from './Signin';
 import TraingVIew from './trainingVIew';
 import './home.scss';
@@ -10,9 +11,14 @@ const Home: FC = () => {
   return (
     <>
       {user ? (
-        <TraingVIew mode="all" />
+        <>
+          <TraingVIew mode="all" />
+        </>
       ) : (
         <div className="home component">
+          <Helmet>
+            <title>筋トレコード</title>
+          </Helmet>
           <p>
             ユーザー登録をすると、日々の筋トレを記録できたり、他のユーザーの筋トレ記録が見えます。
             <br />
