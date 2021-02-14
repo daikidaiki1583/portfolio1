@@ -96,7 +96,10 @@ app.post("/api/insert/", (req, res) => {
   const sqlInsert =
     "INSERT trainingrecord (userid,dt,trainingid,count) values (?,?,?,?);";
   db.query(sqlInsert, [uid, dt, trainingid, count], (err, result) => {
-    if (err) console.log(err);
+    if (err) {
+      console.log(err);
+      return;
+    }
     res.send(result);
   });
 });
