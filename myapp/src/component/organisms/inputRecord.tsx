@@ -1,4 +1,5 @@
 import React, { FC, useState, useMemo, useEffect } from 'react';
+import dayjs from 'dayjs';
 import { Helmet } from 'react-helmet';
 import SelectMenu from '../atoms/selectMenu';
 import Input from '../atoms/input';
@@ -20,6 +21,18 @@ const InputRecord: FC = () => {
     };
   }, []);
   /* eslint-enable arrow-body-style */
+
+  const setDate = (e: React.MouseEvent<HTMLButtonElement>): void => {
+    switch (e.currentTarget.id) {
+      case 'minus':
+        setInputDate(dayjs(date).subtract(1, 'd').format('YYYY-MM-DD'));
+        break;
+      case 'plus':
+        setInputDate(dayjs(date).add(1, 'd').format('YYYY-MM-DD'));
+        break;
+      default:
+    }
+  };
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCount(e.target.value);
@@ -73,12 +86,33 @@ const InputRecord: FC = () => {
           placeholder="回数 "
         />
 
-        <Input
-          id="date"
-          type="date"
-          value={date}
-          handleChange={handleChangeDate}
-        />
+        <div className="input-date">
+          <button
+            type="button"
+            id="minus"
+            onClick={(e: React.MouseEvent<HTMLButtonElement>): void =>
+              setDate(e)
+            }
+          >
+            ＜
+          </button>
+          <Input
+            id="date"
+            type="date"
+            value={date}
+            handleChange={handleChangeDate}
+          />
+          <button
+            type="button"
+            id="plus"
+            onClick={(e: React.MouseEvent<HTMLButtonElement>): void =>
+              setDate(e)
+            }
+          >
+            ＞
+          </button>
+        </div>
+
         <button type="button" onClick={handleSubmit}>
           記録する
         </button>

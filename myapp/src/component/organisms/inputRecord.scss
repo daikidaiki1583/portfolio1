@@ -19,10 +19,23 @@ form{
         }
     }
 
-    button{
-        @include form;
+    .input-date{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         width: 50%;
-        margin:16px auto;
+        margin: auto;
+
+        button{
+            margin: 0 8px;
+        }
+    
+    }
+    
+    button{
+            @include form;
+            width: 50%;
+            margin:16px auto;
     }
 
     .success{
