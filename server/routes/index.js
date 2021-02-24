@@ -139,8 +139,11 @@ passport.use(
           }
           bcrypt.compare(password, user[0].password, (err, result) => {
             if (err) return console.log(err);
-            console.log(result);
-            done(null, user);
+            if (result) {
+              return done(null, user);
+            } else {
+              return done(null, false);
+            }
           });
         }
       );

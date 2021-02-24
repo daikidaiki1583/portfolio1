@@ -12,6 +12,7 @@ const Login: FC = () => {
 
   const [username, setUserneme] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [isError, setError] = useState<boolean>(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     switch (e.target.id) {
@@ -41,6 +42,7 @@ const Login: FC = () => {
       })
       .catch((err) => {
         console.log(err);
+        setError(false);
       });
 
     setUserneme('');
@@ -55,6 +57,9 @@ const Login: FC = () => {
       </Helmet>
 
       <h1>さぁ、筋トレの時間だ</h1>
+      <div className={`error ${isError ? 'add' : ''}`}>
+        ユーザー名かパスワードが異なります
+      </div>
       <form action="">
         <div className="username">
           <Input
