@@ -9,7 +9,7 @@ import './SignIn.scss';
 const SignIn: FC = () => {
   const [password, setPassword] = useState<string>('');
   const [username, setUserneme] = useState<string>('');
-  const [used, setUsed] = useState<boolean>(true);
+  const [used, setUsed] = useState<boolean>(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setUsed(() => false);
