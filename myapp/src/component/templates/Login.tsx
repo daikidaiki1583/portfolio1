@@ -17,13 +17,13 @@ const Login: FC = () => {
   /* eslint-disable arrow-body-style */
   useEffect(() => {
     return () => {
-      setError(false);
+      setError(() => false);
     };
   }, []);
   /* eslint-enable arrow-body-style */
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setError(false);
+    setError(() => false);
     switch (e.target.id) {
       case 'username':
         setUserneme(e.target.value);
@@ -51,7 +51,7 @@ const Login: FC = () => {
       })
       .catch((err) => {
         console.log(err);
-        setError(true);
+        setError(() => true);
       });
 
     setUserneme('');
