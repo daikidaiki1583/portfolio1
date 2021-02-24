@@ -1,4 +1,4 @@
-import React, { FC, useState, useContext } from 'react';
+import React, { FC, useState, useEffect, useContext } from 'react';
 import { Helmet } from 'react-helmet';
 import { useHistory } from 'react-router-dom';
 import Input from '../atoms/input';
@@ -14,7 +14,16 @@ const Login: FC = () => {
   const [password, setPassword] = useState<string>('');
   const [isError, setError] = useState<boolean>(false);
 
+  /* eslint-disable arrow-body-style */
+  useEffect(() => {
+    return () => {
+      setError(false);
+    };
+  }, []);
+  /* eslint-enable arrow-body-style */
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setError(false);
     switch (e.target.id) {
       case 'username':
         setUserneme(e.target.value);
@@ -42,7 +51,7 @@ const Login: FC = () => {
       })
       .catch((err) => {
         console.log(err);
-        setError(false);
+        setError(true);
       });
 
     setUserneme('');
