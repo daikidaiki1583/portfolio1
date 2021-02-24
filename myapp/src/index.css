@@ -26,3 +26,10 @@ code {
     background-position: 50%;
   }
 } 
+
+@media (min-width:600px) and (max-width:1024px) {
+  body{
+    background-position: 50%;
+
+  } 
+}

@@ -64,10 +64,14 @@ form{
 
 
 }
-
-@media (max-width:599px) {
+// 599
+@media (max-width:1024px) {
     form{
         .success{
+            width: 100%;
+        }
+
+        .input-date{
             width: 100%;
         }
     }

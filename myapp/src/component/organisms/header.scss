@@ -20,7 +20,7 @@ header{
 
 }
 
-@media (max-width:599px) {
+@media (max-width:1024px) {
 
     header{
         margin: 0;
@@ -42,12 +42,6 @@ header{
             margin: 0;
             transition: 0.3s;
         }        
-    }
-
-}
-
-@media (max-width:599px) {
-    header{
         .hide{
             bottom: 0;
             left: 0;
@@ -55,5 +49,8 @@ header{
             transform:translateY(100%);
             transition: 0.3s;
         }
+
     }
+
 }
+
