@@ -10,7 +10,7 @@ const Logout: FC = () => (
     </Helmet>
     <h1>筋トレお疲れさまでした</h1>
     <button type="button">
-      <Link to="/">ホームに戻る</Link>
+      <Link to="/auth">ホームに戻る</Link>
     </button>
   </div>
 );

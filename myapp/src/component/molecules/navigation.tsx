@@ -12,9 +12,8 @@ const Navi: FC = () => {
     axios('/logout', {
       withCredentials: true,
     })
-      .then((res) => {
-        console.log(res.data);
-        dispatch({ type: 'logout' });
+      .then(async () => {
+        await dispatch({ type: 'logout' });
       })
       .then(() => {
         history.push('/logout');
@@ -43,12 +42,7 @@ const Navi: FC = () => {
           {/* <div className="link">{user.name}</div> */}
         </>
       ) : (
-        <>
-          <Link to="/login" className="link">
-            <i className="fas fa-sign-in-alt" />
-            <span>ログイン</span>
-          </Link>
-        </>
+        <></>
       )}
     </nav>
   );

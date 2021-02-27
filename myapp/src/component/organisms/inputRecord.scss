@@ -1,7 +1,6 @@
 @import '../../color.scss';
 
 @mixin form{
-    width: 100%;
     margin: 0;
     padding:8px;
     box-sizing:border-box;  
@@ -34,7 +33,6 @@ form{
     
     button{
             @include form;
-            width: 50%;
             margin:16px auto;
     }
 

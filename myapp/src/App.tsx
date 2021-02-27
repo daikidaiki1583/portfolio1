@@ -2,13 +2,12 @@ import React, { FC, useContext } from 'react';
 import './App.scss';
 import { Switch, Route } from 'react-router-dom';
 import Header from './component/organisms/header';
-import Home from './component/templates/home';
 import TrainingView from './component/templates/trainingVIew';
 import InputRecord from './component/organisms/inputRecord';
-import Login from './component/templates/Login';
 import NotFound from './component/atoms/NotFound';
 import { myContext } from './context/Context';
 import Logout from './component/atoms/logout';
+import Auth from './component/page/Auth';
 
 const App: FC = () => {
   const { user } = useContext(myContext);
@@ -21,7 +20,7 @@ const App: FC = () => {
           {user ? (
             <Switch>
               <Route exact path="/">
-                <Home />
+                <TrainingView mode="all" />
               </Route>
 
               <Route path="/inputRecord">
@@ -42,16 +41,12 @@ const App: FC = () => {
             </Switch>
           ) : (
             <Switch>
-              <Route exact path="/">
-                <Home />
-              </Route>
-              <Route path="/login">
-                <Login />
+              <Route path="/auth">
+                <Auth />
               </Route>
               <Route path="/logout">
                 <Logout />
               </Route>
-
               <Route>
                 <NotFound />
               </Route>

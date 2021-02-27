@@ -128,6 +128,8 @@ passport.use(
       passwordField: "password",
     },
     (username, password, done) => {
+      const pass = username === "ゲスト" ? process.env.GUESTUSERPASS : password;
+
       db.query(
         `select * from user where name = '${username}';`,
         (err, user) => {
@@ -137,7 +139,7 @@ passport.use(
           if (!user) {
             return done(null, false);
           }
-          bcrypt.compare(password, user[0].password, (err, result) => {
+          bcrypt.compare(pass, user[0].password, (err, result) => {
             if (err) return console.log(err);
             if (result) {
               return done(null, user);
@@ -202,7 +204,3 @@ const server = https.createServer(options, app);
 server.listen(port, () => {
   console.log(`listening at　port:${port}`);
 });
-
-// app.listen(port, () => {
-//   console.log("http server");
-// });

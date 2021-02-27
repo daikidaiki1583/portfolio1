@@ -1,10 +1,15 @@
 @import '../../color.scss';
 
-.signin{
-
-    .error{
-        opacity: 0;
+.signin{    
+    margin:8px;
+    width: 50%;
+    p{
         width: 50%;
+        margin: auto;
+    }
+    .error{
+        display: none;
+        opacity: 0;
         padding: 4px;
         margin: auto;
         text-align: center;
@@ -13,6 +18,7 @@
         border-radius: 10px;
         background-color: $pink;
         &.add{
+            display: block;
             opacity: 1.0;
             transition: 3s;
         }
@@ -22,6 +28,7 @@
 @media (max-width:599px) {
 
     .signin{
+
         .error{
             width: auto;
         } 

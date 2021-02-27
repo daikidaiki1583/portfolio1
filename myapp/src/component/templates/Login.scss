@@ -1,28 +1,41 @@
 @import '../../color.scss';
 
-.error{
-    opacity: 0;
-    display: none;
+.login{
+    margin: 8px;
     width: 50%;
-    padding: 4px;
-    margin: auto;
-    text-align: center;
-    border: 1px solid $red;
-    color: $red;
-    border-radius: 10px;
-    background-color: $pink;
-    &.add{
-        opacity: 1.0;
-        display: block;
-        transition: 3s;
+
+    .guest{
+        background-color: $medium-green;
+    }
+
+    .error{
+        opacity: 0;
+        display: none;
+
+        padding: 4px;
+        margin: auto;
+        text-align: center;
+        border: 1px solid $red;
+        color: $red;
+        border-radius: 10px;
+        background-color: $pink;
+        &.add{
+            opacity: 1.0;
+            display: block;
+            transition: 3s;
+        }
     }
 }
 
+
 @media (max-width:1024px) {
-    .error{
-        width: 100%;
-        &.add{
-            margin: 0;
+    .login{
+        .error{
+            width: 100%;
+            &.add{
+                margin: 0;
+            }
         }
     }
+
 }

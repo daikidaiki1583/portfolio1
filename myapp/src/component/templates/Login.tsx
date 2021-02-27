@@ -35,14 +35,21 @@ const Login: FC = () => {
     }
   };
 
-  const data = {
+  const user = {
     username,
     password,
   };
 
-  const handleSubmit = (): void => {
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>): void => {
+    const loginInfo =
+      e.currentTarget.id === 'user'
+        ? user
+        : { username: 'ゲスト', password: '' };
+
+    console.log(loginInfo);
+
     axios
-      .post('/login/', data, {
+      .post('/login/', loginInfo, {
         withCredentials: true,
       })
       .then(() => {
@@ -58,14 +65,13 @@ const Login: FC = () => {
     setPassword('');
   };
 
-  // パスワード確認用フォーム追加 サーバーからレスポンスに応じてリダイレクト作成 passport.jsで認証作成
   return (
-    <div className="component">
+    <div className="login component">
       <Helmet>
         <title>ログイン</title>
       </Helmet>
 
-      <h1>さぁ、筋トレの時間だ</h1>
+      <h1>ログイン</h1>
       <div className={`error ${isError ? 'add' : ''}`}>
         ユーザー名かパスワードが異なります
       </div>
@@ -91,9 +97,22 @@ const Login: FC = () => {
         <button
           type="button"
           disabled={!(password && username)}
-          onClick={() => handleSubmit()}
+          id="user"
+          onClick={(e: React.MouseEvent<HTMLButtonElement>): void =>
+            handleSubmit(e)
+          }
         >
           ログイン
+        </button>
+        <button
+          type="button"
+          className="guest"
+          id="guestuser"
+          onClick={(e: React.MouseEvent<HTMLButtonElement>): void =>
+            handleSubmit(e)
+          }
+        >
+          ゲストユーザーでログイン
         </button>
       </form>
     </div>
