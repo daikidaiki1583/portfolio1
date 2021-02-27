@@ -75,17 +75,18 @@ const InputRecord: FC = () => {
       <Helmet>
         <title>記録する</title>
       </Helmet>
-      <form>
-        <SelectMenu value={trainingid} handleChange={handleChangeSelect} />
+      <form className="input-record">
+        <div className="input-count">
+          <SelectMenu value={trainingid} handleChange={handleChangeSelect} />
 
-        <Input
-          id="count"
-          type="number"
-          value={count}
-          handleChange={handleChangeInput}
-          placeholder="回数 "
-        />
-
+          <Input
+            id="count"
+            type="number"
+            value={count}
+            handleChange={handleChangeInput}
+            placeholder="回数 "
+          />
+        </div>
         <div className="input-date">
           <button
             type="button"
@@ -113,7 +114,7 @@ const InputRecord: FC = () => {
           </button>
         </div>
 
-        <button type="button" onClick={handleSubmit}>
+        <button type="button" className="record-button" onClick={handleSubmit}>
           記録する
         </button>
         <div className={`success ${isSend ? 'add' : ''}`}>

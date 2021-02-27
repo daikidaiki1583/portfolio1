@@ -60,7 +60,7 @@ const SignIn: FC = () => {
       <div className={`error ${used ? 'add' : ''}`}>
         そのユーザー名は既に使用されています。
       </div>
-      <form action="">
+      <form id="siginin-form" action="">
         <div>
           <Input
             id="username"
@@ -82,6 +82,7 @@ const SignIn: FC = () => {
 
         <button
           type="button"
+          className="sigiin-button"
           disabled={!(password && username)}
           onClick={() => handleSubmit()}
         >

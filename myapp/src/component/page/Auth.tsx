@@ -6,7 +6,6 @@ import './Auth.scss';
 const Auth: FC = () => (
   <div className="auth">
     <Login />
-
     <Signin />
   </div>
 );

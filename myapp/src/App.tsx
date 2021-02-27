@@ -41,7 +41,7 @@ const App: FC = () => {
             </Switch>
           ) : (
             <Switch>
-              <Route path="/auth">
+              <Route path="/">
                 <Auth />
               </Route>
               <Route path="/logout">

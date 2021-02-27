@@ -24,10 +24,6 @@ const SelectMenu: FC<Props> = ({ value, handleChange }) => {
       .catch((err) => console.log(err));
   }, []);
 
-  //   const handleChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-  //     setTrainingid(parseInt(e.target.value, 10));
-  //   };
-
   return (
     <label htmlFor="menu">
       <select id="menu" value={value} onChange={handleChange} required>

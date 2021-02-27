@@ -4,14 +4,21 @@
     margin: 8px;
     width: 50%;
 
-    .guest{
-        background-color: $medium-green;
+    .login-form{
+        .guest{
+            background-color: $medium-green;
+        }
+        
+        button{
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+        }
     }
 
     .error{
         opacity: 0;
         display: none;
-
         padding: 4px;
         margin: auto;
         text-align: center;
@@ -30,6 +37,7 @@
 
 @media (max-width:1024px) {
     .login{
+        width: 100%;
         .error{
             width: 100%;
             &.add{

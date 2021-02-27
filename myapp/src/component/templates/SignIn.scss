@@ -7,6 +7,7 @@
         width: 50%;
         margin: auto;
     }
+
     .error{
         display: none;
         opacity: 0;
@@ -23,12 +24,22 @@
             transition: 3s;
         }
     }
+
+    #siginin-form{
+        .sigiin-button{
+            width: 100%;
+            padding: 8px;
+        }
+    
+    }
+
+    
 }
 
-@media (max-width:599px) {
+@media (max-width:1024px) {
 
     .signin{
-
+        width: 100%;
         .error{
             width: auto;
         } 

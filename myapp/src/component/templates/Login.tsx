@@ -44,7 +44,7 @@ const Login: FC = () => {
     const loginInfo =
       e.currentTarget.id === 'user'
         ? user
-        : { username: 'ゲスト', password: '' };
+        : { username: 'ゲスト', password: 'guestuser' };
 
     console.log(loginInfo);
 
@@ -75,7 +75,7 @@ const Login: FC = () => {
       <div className={`error ${isError ? 'add' : ''}`}>
         ユーザー名かパスワードが異なります
       </div>
-      <form action="">
+      <form className="login-form" action="">
         <div className="username">
           <Input
             id="username"
