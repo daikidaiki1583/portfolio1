@@ -1,6 +1,7 @@
 import React, { FC, useState, useEffect } from 'react';
 import { Pie } from 'react-chartjs-2';
 import axios from '../../axios';
+import './Piegraph.scss';
 
 const Piegraph: FC = () => {
   const [graphLabel, setLabel] = useState<string[]>([]);
@@ -19,12 +20,10 @@ const Piegraph: FC = () => {
   }, []);
 
   const data = {
-    labels: ['uuuu', 'hudea', 'chuaer', 'bcdh'],
-    // labels: graphLabel,
+    labels: graphLabel,
     datasets: [
       {
-        data: [21, 21, 42, 53],
-        // data: graphData,
+        data: graphData,
         backgroundColor: [
           'rgba(255, 99, 132, 0.8)',
           'rgba(54, 162, 235, 0.8)',
