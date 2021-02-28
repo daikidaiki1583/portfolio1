@@ -36,15 +36,15 @@ const TrainingPeriod: FC = () => {
   });
 
   return (
-    <div className="component training-data">
-      <div className="data">
+    <div className="component" id="training-data">
+      <span className="data">
         <strong>{countTraining}</strong> 日筋トレしています。
-      </div>
+      </span>
 
-      <div className="data">
+      <span className="data">
         <strong>{Math.round((passedDay / countTraining) * 10) / 10}</strong>{' '}
         日に1度筋トレしています。
-      </div>
+      </span>
     </div>
   );
 };

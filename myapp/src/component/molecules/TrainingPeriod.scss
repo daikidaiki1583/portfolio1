@@ -1,8 +1,9 @@
 @import '../../color.scss';
 
-.training-data{
-    text-align: left;
-    
+#training-data{
+    text-align: center;
+    padding: 8px;
+    margin-bottom: 8px;
     strong{
         color: $gold;
         font-size: 4.0rem;

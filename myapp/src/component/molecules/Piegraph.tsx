@@ -1,29 +1,35 @@
-import React, { useEffect } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { Pie } from 'react-chartjs-2';
 import axios from '../../axios';
 
-const Piegraph = () => {
+const Piegraph: FC = () => {
+  const [graphLabel, setLabel] = useState<string[]>([]);
+  const [graphData, setData] = useState<number[]>([]);
+
   useEffect(() => {
     axios
       .get('/api/get/trainingrecord/count/menu', {
         withCredentials: true,
       })
       .then((res) => {
-        console.log(res.data);
+        setLabel(Array.from(res.data, ({ menu }) => menu));
+        setData(Array.from(res.data, ({ sum }) => sum));
       })
       .catch((err) => console.log(err));
-  });
+  }, []);
 
   const data = {
-    labels: ['腕立て', '腹筋', 'スクワット', 'ダンベル'],
+    labels: ['uuuu', 'hudea', 'chuaer', 'bcdh'],
+    // labels: graphLabel,
     datasets: [
       {
-        data: [100, 120, 35, 35],
+        data: [21, 21, 42, 53],
+        // data: graphData,
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
+          'rgba(255, 99, 132, 0.8)',
+          'rgba(54, 162, 235, 0.8)',
+          'rgba(255, 206, 86, 0.8)',
+          'rgba(75, 192, 192, 0.8)',
         ],
         borderColor: [
           'rgba(255, 99, 132, 1)',
@@ -35,9 +41,20 @@ const Piegraph = () => {
       },
     ],
   };
+  const options = {
+    legend: {
+      labels: {
+        fontColor: 'black',
+        fontSize: 12,
+      },
+    },
+  };
   return (
-    <div className="">
-      <Pie data={data} />
+    <div className="component" id="piegraph">
+      <h1>筋トレ種目比率</h1>
+      <div>
+        <Pie data={data} options={options} />
+      </div>
     </div>
   );
 };

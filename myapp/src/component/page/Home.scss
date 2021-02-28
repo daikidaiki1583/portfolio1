@@ -1,11 +1,16 @@
 .home{
-    display: flex;
 
-    .trainingperiod{
-        width: 100%;
-    }
+    .body{
+        display: flex;
+        justify-content: space-between;
+        margin: 0;
+        .graph{
+            width: 50%;
+        }
 
-    .trainingview{
-        width: 100%;
+        .record{
+            margin-left:8px ;
+            width: 50%;
+        }
     }
 }

@@ -99,16 +99,18 @@ app.get("/api/get/trainingrecord/alluser", (req, res) => {
 
 app.get("/api/get/trainingrecord/count/menu", (req, res) => {
   const { uid } = req.user;
-  const sql = `select training.menu, sum(trainingrecord.count) from trainingrecord inner join training on trainingrecord.trainingid = training.tr_id where trainingrecord.userid = "${uid}" group by training.menu;`;
+  const sql = `select training.menu, sum(trainingrecord.count) as sum from trainingrecord inner join training on trainingrecord.trainingid = training.tr_id where trainingrecord.userid = "${uid}" group by training.menu;`;
   db.query(sql, (err, result) => {
     if (err) console.log(err);
     res.send(result);
   });
 });
 
-app.get("/api/get/trainingrecord/graph", (req, res) => {
-  const { start, end } = req.query;
-  const sqlSelect = `SELECT * FROM trainingrecord join training on trainingrecord.trainingid = training.tr_id where dt <= "${end}" AND dt >= "${start}" order by createdAt`;
+//折れ線グラフ
+app.get("/api/get/trainingrecord/graph/:trainingid", (req, res) => {
+  const { uid } = req.user;
+  const { trainingid } = req.params;
+  const sqlSelect = `select trainingrecord.dt as date,sum(trainingrecord.count) as sum from trainingrecord inner join training on trainingrecord.trainingid = training.tr_id where trainingrecord.trainingid = "${trainingid}" AND trainingrecord.userid = "${uid}" group by trainingrecord.dt order by trainingrecord.dt;`;
   db.query(sqlSelect, (err, result) => {
     if (err) console.log(err);
     res.send(result);
