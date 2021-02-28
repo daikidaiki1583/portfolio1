@@ -1,4 +1,5 @@
 import React, { FC, useState, useMemo, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
 import { Helmet } from 'react-helmet';
 import SelectMenu from '../atoms/selectMenu';
@@ -71,58 +72,69 @@ const InputRecord: FC = () => {
   };
 
   return (
-    <div className="component">
-      <Helmet>
-        <title>記録する</title>
-      </Helmet>
-      <form className="input-record">
-        <div className="input-count">
-          <SelectMenu value={trainingid} handleChange={handleChangeSelect} />
+    <>
+      <div className="component">
+        <Helmet>
+          <title>記録する</title>
+        </Helmet>
+        <form className="input-record">
+          <div className="input-count">
+            <SelectMenu value={trainingid} handleChange={handleChangeSelect} />
 
-          <Input
-            id="count"
-            type="number"
-            value={count}
-            handleChange={handleChangeInput}
-            placeholder="回数 "
-          />
-        </div>
-        <div className="input-date">
+            <Input
+              id="count"
+              type="number"
+              value={count}
+              handleChange={handleChangeInput}
+              placeholder="回数 "
+            />
+          </div>
+          <div className="input-date">
+            <button
+              type="button"
+              id="minus"
+              onClick={(e: React.MouseEvent<HTMLButtonElement>): void =>
+                setDate(e)
+              }
+            >
+              ＜
+            </button>
+            <Input
+              id="date"
+              type="date"
+              value={date}
+              handleChange={handleChangeDate}
+            />
+            <button
+              type="button"
+              id="plus"
+              onClick={(e: React.MouseEvent<HTMLButtonElement>): void =>
+                setDate(e)
+              }
+            >
+              ＞
+            </button>
+          </div>
+
           <button
             type="button"
-            id="minus"
-            onClick={(e: React.MouseEvent<HTMLButtonElement>): void =>
-              setDate(e)
-            }
+            className="record-button"
+            onClick={handleSubmit}
           >
-            ＜
+            記録する
           </button>
-          <Input
-            id="date"
-            type="date"
-            value={date}
-            handleChange={handleChangeDate}
-          />
-          <button
-            type="button"
-            id="plus"
-            onClick={(e: React.MouseEvent<HTMLButtonElement>): void =>
-              setDate(e)
-            }
-          >
-            ＞
-          </button>
-        </div>
-
-        <button type="button" className="record-button" onClick={handleSubmit}>
-          記録する
+          <div className={`success ${isSend ? 'add' : ''}`}>
+            {isSend}
+            記録に成功しました。
+          </div>
+        </form>
+      </div>
+      <Link to="/">
+        <button type="button" className="tohome">
+          ホームに戻る
         </button>
-        <div className={`success ${isSend ? 'add' : ''}`}>
-          {isSend}
-          記録に成功しました。
-        </div>
-      </form>
-    </div>
+      </Link>
+    </>
   );
 };
 

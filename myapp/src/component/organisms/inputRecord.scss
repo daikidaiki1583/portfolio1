@@ -4,8 +4,9 @@
     margin: 0;
     padding:8px;
     box-sizing:border-box;  
-    width: 100%;        
+ 
 }
+
 
 .input-record{
 
@@ -67,8 +68,15 @@
         100% {opacity: 0;}
 
     }
+ 
 
+}
 
+.tohome{
+    padding: 8px;
+    @include form;
+    width: 25%;
+    margin: 16px auto;
 }
 // 599
 @media (max-width:1024px) {
@@ -85,5 +93,7 @@
             width: 100%;
         }
     }
-    
+    .tohome{
+        width: 50%;
+    }
 }

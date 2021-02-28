@@ -9,3 +9,10 @@
         font-size: 4.0rem;
     }
 }
+
+@media (max-width:1024px) {
+    #training-data{
+        display: flex;
+        flex-direction: column;
+    }   
+}

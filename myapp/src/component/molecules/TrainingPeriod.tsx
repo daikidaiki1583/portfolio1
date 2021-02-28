@@ -43,7 +43,7 @@ const TrainingPeriod: FC = () => {
 
       <span className="data">
         <strong>{Math.round((passedDay / countTraining) * 10) / 10}</strong>{' '}
-        日に1度筋トレしています。
+        日に1度の頻度で筋トレしています。
       </span>
     </div>
   );

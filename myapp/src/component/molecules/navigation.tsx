@@ -27,6 +27,10 @@ const Navi: FC = () => {
     <nav className="navigation">
       {user ? (
         <>
+          <Link to="/" className="link">
+            <i className="fas fa-home" />
+            <span>ホーム</span>
+          </Link>
           <Link to="/trainingView" className="link">
             <i className="fas fa-chart-line" />
             <span>みんなの成果を見る</span>
@@ -39,7 +43,6 @@ const Navi: FC = () => {
             <i className="fas fa-sign-out-alt" />
             <span>ログアウト</span>
           </Link>
-          {/* <div className="link">{user.name}</div> */}
         </>
       ) : (
         <></>
