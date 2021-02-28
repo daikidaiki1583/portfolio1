@@ -14,3 +14,21 @@
         }
     }
 }
+
+@media (max-width:1024px) {
+    .home{
+
+        .body{
+            flex-direction: column;
+
+            .graph{
+                width: 100%;
+            }
+    
+            .record{
+                margin-left:0 ;
+                width: 100%;
+            }
+        }
+    }   
+}

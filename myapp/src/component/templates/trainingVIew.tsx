@@ -1,6 +1,7 @@
-import React, { FC, useState, useMemo } from 'react';
+import React, { FC, useState, useMemo, useEffect } from 'react';
 import dayjs from 'dayjs';
 import { Helmet } from 'react-helmet';
+import axios from '../../axios';
 import TrainingList from '../organisms/trainingList';
 import Input from '../atoms/input';
 import calculateToday from '../../data/today';
@@ -8,12 +9,24 @@ import './trainingView.scss';
 
 type Props = {
   mode: string;
-  latestDay?: string;
 };
 
-const TrainingView: FC<Props> = ({ mode, latestDay }) => {
+const TrainingView: FC<Props> = ({ mode }) => {
   const today = useMemo(() => calculateToday(), []);
-  const [date, setInputDate] = useState<string>(latestDay || today);
+  const [date, setInputDate] = useState<string>(today);
+
+  useEffect(() => {
+    axios
+      .get('/api/get/trainingperiod/max', {
+        withCredentials: true,
+      })
+      .then((res) => {
+        setInputDate(() => dayjs(res.data[0]['MAX(dt)']).format('YYYY-MM-DD'));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const setDate = (e: React.MouseEvent<HTMLButtonElement>): void => {
     switch (e.currentTarget.id) {

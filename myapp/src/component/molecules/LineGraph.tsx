@@ -71,7 +71,9 @@ const LineGraph: FC = () => {
     <div className="component" id="linegraph">
       <h1>時系列</h1>
       <SelectMenu value={trainingid} handleChange={handleChangeSelect} />
-      <Line data={data} options={options} />
+      <div id="line-chart">
+        <Line data={data} options={options} />
+      </div>
     </div>
   );
 };
