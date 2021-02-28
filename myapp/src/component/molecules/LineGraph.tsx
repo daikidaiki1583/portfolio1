@@ -5,8 +5,6 @@ import SelectMenu from '../atoms/selectMenu';
 import axios from '../../axios';
 import './LineGraph.scss';
 
-defaults.global.defaultColor = '#000000';
-
 const LineGraph: FC = () => {
   const [trainingid, setTrainingid] = useState<number>(1);
   const [graphLabel, setLabel] = useState<string[]>([]);
