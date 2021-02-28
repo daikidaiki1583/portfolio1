@@ -35,7 +35,7 @@ const TrainingView: FC<Props> = ({ mode }) => {
       <Helmet>
         <title>トレーニング履歴</title>
       </Helmet>
-      <h1>筋トレ記録</h1>
+      <h1>{mode === 'user' ? 'マイ' : 'みんなの'}筋トレ記録</h1>
       <div className="date">
         <button
           type="button"

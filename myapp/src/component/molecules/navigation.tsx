@@ -25,11 +25,11 @@ const Navi: FC = () => {
 
   return (
     <nav className="navigation">
-      {user ? (
+      {!user ? (
         <>
           <Link to="/trainingView" className="link">
             <i className="fas fa-chart-line" />
-            <span>成果を見る</span>
+            <span>みんなの成果を見る</span>
           </Link>
           <Link to="/inputRecord" className="link">
             <i className="fas fa-pencil-alt" />

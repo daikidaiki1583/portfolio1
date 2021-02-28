@@ -82,7 +82,7 @@ const Login: FC = () => {
             type="text"
             value={username}
             handleChange={handleChange}
-            placeholder="ユーザーネーム"
+            placeholder="ユーザー名"
           />
         </div>
         <div className="password">

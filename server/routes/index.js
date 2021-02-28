@@ -37,6 +37,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+//筋トレメニュー一覧取得
 app.get("/api/get/training", (req, res) => {
   const sqlSelect = "SELECT * FROM training order by tr_id";
   db.query(sqlSelect, (err, result) => {
@@ -45,6 +46,7 @@ app.get("/api/get/training", (req, res) => {
   });
 });
 
+//削除
 app.delete("/api/delete/:id", (req, res) => {
   const id = req.params.id;
   const sqlDelete = "DELETE FROM trainingrecord WHERE id = ?;";
@@ -53,6 +55,7 @@ app.delete("/api/delete/:id", (req, res) => {
   });
 });
 
+//筋トレ記録取得
 app.get("/api/get/trainingrecord/", (req, res) => {
   const { uid } = req.user;
   const { dt } = req.query;
@@ -63,10 +66,41 @@ app.get("/api/get/trainingrecord/", (req, res) => {
   });
 });
 
+//総トレーニング回数取得
+app.get("/api/get/counttraining", (req, res) => {
+  const { uid } = req.user;
+  const sql = `select count(distinct dt) from trainingrecord where userid = ${uid};`;
+  db.query(sql, (err, result) => {
+    if (err) return console.log(err);
+    console.log(result);
+    res.send(result);
+  });
+});
+
+//トレーニング期間取得
+app.get("/api/get/trainingperiod", (req, res) => {
+  const { uid } = req.user;
+  const sql = `select MAX(dt),MIN(dt) from trainingrecord where userid = ${uid};`;
+  db.query(sql, (err, result) => {
+    if (err) return console.log(err);
+    console.log(result);
+    res.send(result);
+  });
+});
+
 app.get("/api/get/trainingrecord/alluser", (req, res) => {
   const { dt } = req.query;
   const sqlSelect = `SELECT id,name,menu,count FROM trainingrecord as tr inner join user as u on tr.userid = u.uid inner join training as t on tr.trainingid = t.tr_id where dt = "${dt}" order by createdAt desc;`;
   db.query(sqlSelect, (err, result) => {
+    if (err) console.log(err);
+    res.send(result);
+  });
+});
+
+app.get("/api/get/trainingrecord/count/menu", (req, res) => {
+  const { uid } = req.user;
+  const sql = `select training.menu, sum(trainingrecord.count) from trainingrecord inner join training on trainingrecord.trainingid = training.tr_id where trainingrecord.userid = "${uid}" group by training.menu;`;
+  db.query(sql, (err, result) => {
     if (err) console.log(err);
     res.send(result);
   });
@@ -90,6 +124,7 @@ app.get("/api/get/trainingrecord/distinct/", (req, res) => {
   });
 });
 
+//記録追加
 app.post("/api/insert/", (req, res) => {
   const { uid } = req.user;
   const { dt, trainingid, count } = req.body;

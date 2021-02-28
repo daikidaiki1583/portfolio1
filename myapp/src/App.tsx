@@ -8,6 +8,7 @@ import NotFound from './component/atoms/NotFound';
 import { myContext } from './context/Context';
 import Logout from './component/atoms/logout';
 import Auth from './component/page/Auth';
+import Home from './component/page/Home';
 
 const App: FC = () => {
   const { user } = useContext(myContext);
@@ -20,7 +21,7 @@ const App: FC = () => {
           {user ? (
             <Switch>
               <Route exact path="/">
-                <TrainingView mode="all" />
+                <Home />
               </Route>
 
               <Route path="/inputRecord">
@@ -28,7 +29,7 @@ const App: FC = () => {
               </Route>
 
               <Route path="/trainingview">
-                <TrainingView mode="user" />
+                <TrainingView mode="all" />
               </Route>
 
               <Route path="/logout">
