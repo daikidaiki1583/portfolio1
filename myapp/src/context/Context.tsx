@@ -56,7 +56,6 @@ const Context = (props: PropsWithChildren<any>) => {
         withCredentials: true,
       })
       .then((res) => {
-        console.log(res.data);
         setUser(res.data);
       })
       .catch((err) => {

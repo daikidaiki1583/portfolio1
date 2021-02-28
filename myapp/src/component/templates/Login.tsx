@@ -46,8 +46,6 @@ const Login: FC = () => {
         ? user
         : { username: 'ゲスト', password: 'guestuser' };
 
-    console.log(loginInfo);
-
     axios
       .post('/login/', loginInfo, {
         withCredentials: true,

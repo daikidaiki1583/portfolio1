@@ -32,7 +32,6 @@ const TrainingList: FC<Props> = ({ date, mode }) => {
         },
       })
       .then((response) => {
-        console.log(response.data);
         setTrainingRecord(response.data);
 
         if (mode === 'user') {

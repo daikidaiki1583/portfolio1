@@ -24,7 +24,7 @@ const TrainingPeriod: FC = () => {
 
   useEffect(() => {
     axios
-      .get('/api/get/trainingperiod', {
+      .get('/api/get/trainingperiod/min', {
         withCredentials: true,
       })
       .then((res) => {

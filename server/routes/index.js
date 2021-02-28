@@ -77,13 +77,21 @@ app.get("/api/get/counttraining", (req, res) => {
   });
 });
 
-//トレーニング期間取得
-app.get("/api/get/trainingperiod", (req, res) => {
+//トレーニング開始日取得
+app.get("/api/get/trainingperiod/min", (req, res) => {
   const { uid } = req.user;
-  const sql = `select MAX(dt),MIN(dt) from trainingrecord where userid = ${uid};`;
+  const sql = `select MIN(dt) from trainingrecord where userid = ${uid};`;
   db.query(sql, (err, result) => {
     if (err) return console.log(err);
-    console.log(result);
+    res.send(result);
+  });
+});
+
+app.get("/api/get/trainingperiod/max", (req, res) => {
+  const { uid } = req.user;
+  const sql = `select MAX(dt) from trainingrecord where userid = ${uid};`;
+  db.query(sql, (err, result) => {
+    if (err) return console.log(err);
     res.send(result);
   });
 });
@@ -99,7 +107,7 @@ app.get("/api/get/trainingrecord/alluser", (req, res) => {
 
 app.get("/api/get/trainingrecord/count/menu", (req, res) => {
   const { uid } = req.user;
-  const sql = `select training.menu, sum(trainingrecord.count) as sum from trainingrecord inner join training on trainingrecord.trainingid = training.tr_id where trainingrecord.userid = "${uid}" group by training.menu;`;
+  const sql = `select training.menu, sum(trainingrecord.count) as sum from trainingrecord inner join training on trainingrecord.trainingid = training.tr_id where trainingrecord.userid = "${uid}" group by training.menu order by training.tr_id;`;
   db.query(sql, (err, result) => {
     if (err) console.log(err);
     res.send(result);
