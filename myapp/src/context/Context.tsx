@@ -28,27 +28,18 @@ type User = {
   name?: string;
 };
 
+type Context = {
+  dispatch: React.Dispatch<Action>;
+  user: User;
+  checkHeight: boolean;
+}
+
 /* eslint-disable */
 export const myContext = createContext<any>({});
 const Context = (props: PropsWithChildren<any>) => {
   const [user, setUser] = useState<User | null>(null);
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [pageHeight, setHeight] = useState<number>(0);
-  const [checkHeight, setCheckHeight] = useState<boolean>(false);
-  const value = { user, dispatch, checkHeight };
-
-  useEffect(() => {
-    setHeight(document.body.scrollHeight - document.body.offsetHeight);
-
-    const measure = () => {
-      if (window.scrollY === pageHeight) {
-        setCheckHeight(true);
-      } else {
-        setCheckHeight(false);
-      }
-    };
-    window.addEventListener('scroll', measure, true);
-  }, [pageHeight, checkHeight]);
+  const value = { user, dispatch,  };
 
   useEffect(() => {
     axios
